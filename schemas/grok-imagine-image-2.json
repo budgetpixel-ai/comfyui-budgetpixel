@@ -1,0 +1,69 @@
+{
+  "id": "grok-imagine-image-2",
+  "kind": "image",
+  "path": "/images/grok-imagine-image-2",
+  "poll_path": "/images/{id}",
+  "title": "Grok Imagine 2.0",
+  "category": "xAI",
+  "summary": "Generate image with Grok Imagine 2.0",
+  "description": "xAI Grok Imagine 2.0 — the latest Grok image model: precise editing, infographics, ads, game assets, UI/UX mockups and storyboards. Text-to-image, plus editing from a single input image (the input image is free). Billing: per image, quality × resolution — low 1K = 50, low 2K = 80, medium 1K = 80, medium 2K = 100 credits. Use POST /v1/cost for an exact quote.",
+  "pricing_text": "Pricing: 50 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio. Ignored when `image` is supplied — an edit always matches the input image's frame.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "2:1",
+          "1:2",
+          "auto"
+        ],
+        "type": "string"
+      },
+      "image": {
+        "description": "Optional input image to edit (one only — this model has no multi-reference form). Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Costs nothing extra.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate. This model returns a single image per request.",
+        "maximum": 1,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate, or the edit to apply when `image` is supplied.",
+        "type": "string"
+      },
+      "quality": {
+        "default": "low",
+        "description": "Rendering quality. Combines with `size` to set the price: low bills 50 (1K) / 80 (2K), medium bills 80 (1K) / 100 (2K). This model has no `high` tier.",
+        "enum": [
+          "low",
+          "medium"
+        ],
+        "type": "string"
+      },
+      "size": {
+        "default": "1K",
+        "description": "Output resolution tier. Combines with `quality` to set the price: 1K bills 50 credits at low quality and 80 at medium.",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

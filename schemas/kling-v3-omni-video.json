@@ -1,0 +1,77 @@
+{
+  "id": "kling-v3-omni-video",
+  "kind": "video",
+  "path": "/videos/kling-v3-omni-video",
+  "poll_path": "/videos/{id}",
+  "title": "Kling V3 Omni",
+  "category": "Kling",
+  "summary": "Generate video with Kling V3 Omni",
+  "description": "Kuaishou Kling V3 Omni — text-to-video; image-to-video (start + optional end frame); reference-images-to-video (up to 7 images); and video-to-video editing (supply a `video`). 720p / 1080p / 4K, priced per resolution and per audio (see `resolution_pricing` in GET /v1/models and POST /v1/cost). Video-edit carries its own per-second rate and never has audio (the model forces sound off with an input video).",
+  "pricing_text": "Pricing: 85 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio. Ignored when an input image or video already sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "description": "Generate audio with the video. Raises the 720p/1080p per-second rate (no price impact at 4K); unavailable on video-edit.",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video. Can't be combined with `reference_images`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds (3–15). For video-edit, set this to the input video's rounded duration.",
+        "maximum": 15,
+        "minimum": 3,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images that guide the generated video. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image` (start/end frames). Up to 7 on their own (reference-images-to-video); up to 4 when accompanying a `video` edit.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 7,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "720p",
+          "1080p",
+          "4k"
+        ],
+        "type": "string"
+      },
+      "video": {
+        "description": "Optional input video for video-to-video editing. Provide a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). When set, the request runs in video-edit mode: up to 4 `reference_images` may guide the edit, start/end frames are not supported, audio is always off, and the output length matches the input video — set `length_seconds` to the input's duration rounded to whole seconds (3–15), which is what billing uses.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

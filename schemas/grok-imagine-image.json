@@ -1,0 +1,65 @@
+{
+  "id": "grok-imagine-image",
+  "kind": "image",
+  "path": "/images/grok-imagine-image",
+  "poll_path": "/images/{id}",
+  "title": "Grok Imagine",
+  "category": "xAI",
+  "summary": "Generate image with Grok Imagine",
+  "description": "xAI Grok Imagine — image generation with strong aesthetics and instruction-based image editing from up to 3 reference images. Flat 35 credits per image at 1K or 2K.",
+  "pricing_text": "Pricing: 35 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "2:1",
+          "1:2",
+          "auto",
+          "match_input_image"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 3) for image editing. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Use aspect_ratio \"match_input_image\" (or \"auto\") to let the model follow the input.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "1K",
+        "description": "Output resolution tier. Both tiers bill the same 35 credits per image.",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

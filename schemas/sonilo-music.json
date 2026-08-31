@@ -1,0 +1,38 @@
+{
+  "id": "sonilo-music",
+  "kind": "audio",
+  "path": "/audios/sonilo-music",
+  "poll_path": "/audios/{id}",
+  "title": "Sonilo Music",
+  "category": "Music",
+  "summary": "Generate music with Sonilo Music",
+  "description": "Sonilo text-to-music — licensed instrumental and background music of an exact length (5-360 seconds) from a text prompt: soundtracks for videos, ads, apps and games. Priced per second of the requested duration with a 10-second minimum (rate in GET /v1/models; POST /v1/cost quotes the exact price). MP3 or WAV output.",
+  "pricing_text": "Pricing: 4 credits per second (10s minimum).",
+  "input": {
+    "properties": {
+      "duration": {
+        "default": 30,
+        "description": "Length of the track in seconds (5-360). Billed per second with a 10-second minimum.",
+        "maximum": 360,
+        "minimum": 5,
+        "type": "integer"
+      },
+      "format": {
+        "default": "mp3",
+        "description": "Output audio format.",
+        "enum": [
+          "mp3",
+          "wav"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Description of the music (up to 2000 characters; even a few words work), e.g. \"30 seconds of upbeat electronic instrumental for a product launch video, no vocals\".",
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

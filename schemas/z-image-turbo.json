@@ -1,0 +1,53 @@
+{
+  "id": "z-image-turbo",
+  "kind": "image",
+  "path": "/images/z-image-turbo",
+  "poll_path": "/images/{id}",
+  "title": "Z-Image-Turbo",
+  "category": "Alibaba",
+  "summary": "Generate image with Z-Image-Turbo",
+  "description": "Tongyi-MAI Z-Image-Turbo — ultra-fast 6B-parameter text-to-image with only 9 inference steps. Supports negative prompt and seed control.",
+  "pricing_text": "Pricing: 15 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9",
+          "9:21"
+        ],
+        "type": "string"
+      },
+      "negative_prompt": {
+        "description": "What to avoid in the generated image.",
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "clarity-upscaler",
+  "kind": "upscale",
+  "path": "/upscales/clarity-upscaler",
+  "poll_path": "/upscales/{id}",
+  "title": "Clarity Upscaler",
+  "category": "Upscaling",
+  "summary": "Upscale an image with Clarity Upscaler",
+  "description": "Clarity Upscaler — creative AI upscaling that can add detail as it enlarges, steered by creativity/resemblance controls and an optional guiding prompt. 30 credits per image (typically ~60 seconds).",
+  "pricing_text": "Pricing: 25 credits per generation.",
+  "input": {
+    "properties": {
+      "creativity": {
+        "default": 0.35,
+        "description": "How much new detail the model may invent (0.3-0.9 recommended).",
+        "type": "number"
+      },
+      "dynamic": {
+        "default": 6,
+        "description": "HDR effect strength (3-9 for best results).",
+        "type": "number"
+      },
+      "image": {
+        "description": "Image to upscale. A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "prompt": {
+        "description": "Optional guiding prompt describing the image content — helps the model invent plausible detail.",
+        "type": "string"
+      },
+      "resemblance": {
+        "default": 0.6,
+        "description": "How closely the result must match the input (0-3).",
+        "type": "number"
+      },
+      "scale_factor": {
+        "default": 2,
+        "description": "Upscale factor (2 or 4).",
+        "type": "number"
+      },
+      "seed": {
+        "description": "Seed for reproducible results. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "image"
+    ]
+  }
+}

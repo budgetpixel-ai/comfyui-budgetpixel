@@ -1,0 +1,9 @@
+# Excluded from the published registry package (dev-only files).
+scripts/
+tests/
+.github/
+.venv/
+venv/
+.ruff_cache/
+__pycache__/
+node.zip

@@ -1,0 +1,72 @@
+{
+  "id": "flux-2-klein",
+  "kind": "image",
+  "path": "/images/flux-2-klein",
+  "poll_path": "/images/{id}",
+  "title": "FLUX 2 Klein",
+  "category": "Black Forest Labs",
+  "summary": "Generate image with FLUX 2 Klein",
+  "description": "Black Forest Labs FLUX.2 Klein — sub-second generation with excellent prompt adherence. Text-to-image and image editing with up to 3 reference images, megapixel-based resolution, and seed control.",
+  "pricing_text": "Pricing: 10 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9",
+          "9:21",
+          "5:4",
+          "4:5",
+          "match_input_image"
+        ],
+        "type": "string"
+      },
+      "megapixel": {
+        "default": 1,
+        "description": "Output resolution in megapixels.",
+        "enum": [
+          0.5,
+          1,
+          2,
+          4
+        ],
+        "type": "number"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 3) for image editing. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Use aspect_ratio \"match_input_image\" to keep the first reference's aspect ratio.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

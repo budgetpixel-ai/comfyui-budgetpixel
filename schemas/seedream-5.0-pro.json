@@ -1,0 +1,63 @@
+{
+  "id": "seedream-5.0-pro",
+  "kind": "image",
+  "path": "/images/seedream-5.0-pro",
+  "poll_path": "/images/{id}",
+  "title": "SeeDream 5.0 Pro",
+  "category": "Bytedance",
+  "summary": "Generate image with SeeDream 5.0 Pro",
+  "description": "ByteDance SeeDream 5.0 Pro — precise image editing with full layer control. Text-to-image, instruction-based editing, and multi-reference composition from up to 9 reference images with 1K/2K output. Billing: 55 credits per image at 1K, 110 at 2K; input images bill 5 credits each after the first (first is free). No grouped/sequential generation.",
+  "pricing_text": "Pricing: 55 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "2:3",
+          "3:2",
+          "21:9",
+          "9:21"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 9) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. The first input image is free; each additional one bills 5 credits per generated image.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "1K",
+        "description": "Output resolution. 1K bills 55 credits per image; 2K bills 110.",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

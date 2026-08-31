@@ -1,0 +1,72 @@
+{
+  "id": "wan-2.7-pro",
+  "kind": "image",
+  "path": "/images/wan-2.7-pro",
+  "poll_path": "/images/{id}",
+  "title": "Wan 2.7 Pro",
+  "category": "Alibaba",
+  "summary": "Generate image with Wan 2.7 Pro",
+  "description": "Alibaba Wan 2.7 Pro — professional edition of Wan 2.7 with 4K output support, thinking mode, and multi-reference composition from up to 9 reference images.",
+  "pricing_text": "Pricing: 80 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9",
+          "match_input_image"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 9) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Use aspect_ratio \"match_input_image\" to keep the input's aspect ratio.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output resolution tier. 4K applies to text-to-image only — with reference images the output falls back to 2K.",
+        "enum": [
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "type": "string"
+      },
+      "thinking_mode": {
+        "description": "Enable the model's thinking mode for stronger prompt planning. Text-to-image only — ignored when reference images are provided.",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "omni-human-1.5",
+  "kind": "lip-sync",
+  "path": "/lip-sync/omni-human-1.5",
+  "poll_path": "/lip-sync/{id}",
+  "title": "OmniHuman 1.5",
+  "category": "Lip Sync",
+  "summary": "Lip sync with OmniHuman 1.5",
+  "description": "BytePlus OmniHuman 1.5 — animates the person (or character/pet) in an image to speak the input audio with synchronized lips, facial expression, and body motion. Priced per second of the input audio, rounded UP to whole seconds (135 credits/second — e.g. a 12.4s clip bills as 13s).",
+  "pricing_text": "Pricing: 135 credits per second.",
+  "input": {
+    "properties": {
+      "audio": {
+        "description": "The speech/audio to lip-sync (mp3/wav, up to 60 seconds, max 5 MB). A public audio URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "type": "string",
+        "x-bpx-media": "audio"
+      },
+      "image": {
+        "description": "The subject to animate — a human face/portrait, character, or pet. A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. jpg/png/webp.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "output_resolution": {
+        "default": 1080,
+        "description": "Output resolution (same price for both).",
+        "enum": [
+          720,
+          1080
+        ],
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Optional text prompt to guide the animation style or actions.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "image",
+      "audio"
+    ]
+  }
+}

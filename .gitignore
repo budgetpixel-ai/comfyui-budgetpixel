@@ -1,0 +1,13 @@
+# Local credentials — never commit. See README "API key" section.
+budgetpixel.json
+
+__pycache__/
+*.pyc
+.ruff_cache/
+
+# comfy-cli publish artifact
+node.zip
+.venv/
+venv/
+.pytest_cache/
+.DS_Store

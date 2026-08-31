@@ -1,0 +1,54 @@
+{
+  "id": "flux-1.1-pro",
+  "kind": "image",
+  "path": "/images/flux-1.1-pro",
+  "poll_path": "/images/{id}",
+  "title": "FLUX 1.1 Pro",
+  "category": "Black Forest Labs",
+  "summary": "Generate image with FLUX 1.1 Pro",
+  "description": "Black Forest Labs FLUX 1.1 Pro — fast, high-quality generation with enhanced prompt adherence. Text-to-image and single-image editing.",
+  "pricing_text": "Pricing: 40 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "5:4",
+          "4:5"
+        ],
+        "type": "string"
+      },
+      "image": {
+        "description": "Optional image-to-image input. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

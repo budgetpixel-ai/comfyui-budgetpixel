@@ -1,0 +1,46 @@
+name: sync models from API
+
+# Keeps the node pack in lockstep with the BudgetPixel API: regenerates the
+# schema snapshots from the live OpenAPI spec and opens a PR when anything
+# changed (new models, new params, price changes). Merge the PR, bump the
+# version in pyproject.toml, and the publish workflow ships it.
+#
+# Secrets: BUDGETPIXEL_API_KEY (optional but recommended) — adds pricing text
+# and filters to API-available models, exactly like a local codegen run.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1" # Mondays 06:17 UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'budgetpixel-ai/ComfyUI-BudgetPixel' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pyyaml
+      - name: Regenerate schemas from the live spec
+        env:
+          BUDGETPIXEL_API_KEY: ${{ secrets.BUDGETPIXEL_API_KEY }}
+        run: python scripts/generate_schemas.py
+      - name: Verify every schema still builds a node
+        run: python tests/test_nodes_build.py
+      - name: Open PR if anything changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: sync/models
+          title: "sync: model schemas from live API"
+          commit-message: "sync: regenerate model schemas from live API"
+          body: |
+            Automated schema refresh from `GET /v1/openapi.yaml`.
+            Review the diff (new models / changed params / pricing), then merge
+            and bump `pyproject.toml` version to publish.
+          delete-branch: true

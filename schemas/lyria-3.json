@@ -1,0 +1,35 @@
+{
+  "id": "lyria-3",
+  "kind": "audio",
+  "path": "/audios/lyria-3",
+  "poll_path": "/audios/{id}",
+  "title": "Lyria 3",
+  "category": "Music",
+  "summary": "Generate music with Lyria 3",
+  "description": "Google Lyria 3 — high-fidelity music from a text prompt, with optional lyrics and up to 10 reference images to condition the mood. MP3 output (SynthID-watermarked).",
+  "pricing_text": "Pricing: 100 credits per generation.",
+  "input": {
+    "properties": {
+      "images": {
+        "description": "Optional reference images (up to 10) to condition the track's mood/theme. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "lyrics": {
+        "description": "Optional lyrics (up to 3000 characters).",
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Description of the music to generate (10-2000 characters).",
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

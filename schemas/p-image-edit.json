@@ -1,0 +1,58 @@
+{
+  "id": "p-image-edit",
+  "kind": "image",
+  "path": "/images/p-image-edit",
+  "poll_path": "/images/{id}",
+  "title": "P-Image Edit",
+  "category": "Pruna AI",
+  "summary": "Generate image with P-Image Edit",
+  "description": "Pruna AI P-Image Edit — an optimised Qwen-based image editing model taking up to 3 reference images. Fast multi-image editing for composition, style transfer, and object manipulation. Refer to inputs as \"image 1\", \"image 2\" in the prompt.",
+  "pricing_text": "Pricing: 15 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "match_input_image",
+        "description": "Output aspect ratio. Defaults to matching the first reference image.",
+        "enum": [
+          "match_input_image",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate. This model returns a single image per request.",
+        "maximum": 1,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text instruction describing the desired edit or composition.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Reference images to edit or compose (1-3). Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt",
+      "reference_images"
+    ]
+  }
+}

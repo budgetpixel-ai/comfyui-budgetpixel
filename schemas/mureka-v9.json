@@ -1,0 +1,39 @@
+{
+  "id": "mureka-v9",
+  "kind": "audio",
+  "path": "/audios/mureka-v9",
+  "poll_path": "/audios/{id}",
+  "title": "Mureka V9",
+  "category": "Music",
+  "summary": "Generate music with Mureka V9",
+  "description": "Mureka V9 — songs that sing your exact lyrics (structural tags like [verse]/[chorus] supported) with a vocal gender preference, or instrumental/BGM tracks from a prompt. MP3 output.",
+  "pricing_text": "Pricing: 60 credits per generation.",
+  "input": {
+    "properties": {
+      "instrumental": {
+        "default": false,
+        "description": "Generate an instrumental/BGM track from the prompt (no vocals, lyrics ignored).",
+        "type": "boolean"
+      },
+      "lyrics": {
+        "description": "Lyrics to sing verbatim (1-5000 characters; [verse]/[chorus]/[bridge] tags supported). Required for songs; ignored for instrumental tracks.",
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Style hint (up to 1024 characters). Optional for songs; required for instrumental tracks.",
+        "type": "string"
+      },
+      "vocal_gender": {
+        "default": "auto",
+        "description": "Preferred vocal gender for songs.",
+        "enum": [
+          "auto",
+          "female",
+          "male"
+        ],
+        "type": "string"
+      }
+    },
+    "required": []
+  }
+}

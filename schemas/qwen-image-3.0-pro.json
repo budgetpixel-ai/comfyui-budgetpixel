@@ -1,0 +1,71 @@
+{
+  "id": "qwen-image-3.0-pro",
+  "kind": "image",
+  "path": "/images/qwen-image-3.0-pro",
+  "poll_path": "/images/{id}",
+  "title": "Qwen Image 3.0 Pro",
+  "category": "Alibaba",
+  "summary": "Generate image with Qwen Image 3.0 Pro",
+  "description": "Alibaba Qwen Image 3.0 Pro — professional infographics, exquisite photorealism, and stronger prompt adherence. Multi-image fusion from up to 3 reference images. Billing: 45 credits per image at 1K, 85 at 2K.",
+  "pricing_text": "Pricing: 45 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9",
+          "match_input_image"
+        ],
+        "type": "string"
+      },
+      "negative_prompt": {
+        "description": "What to avoid in the generated image.",
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 3) for image editing and multi-image fusion. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Use aspect_ratio \"match_input_image\" to keep the input's aspect ratio.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      },
+      "size": {
+        "default": "1K",
+        "description": "Output resolution tier. 1K bills 45 credits per image; 2K bills 85.",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "qwen-image-2.0-pro",
+  "kind": "image",
+  "path": "/images/qwen-image-2.0-pro",
+  "poll_path": "/images/{id}",
+  "title": "Qwen Image 2.0 Pro",
+  "category": "Alibaba",
+  "summary": "Generate image with Qwen Image 2.0 Pro",
+  "description": "Alibaba Qwen Image 2.0 Pro — premium generation with enhanced text rendering, fine-grained realism, and stronger semantic adherence. Multi-image fusion from up to 3 reference images.",
+  "pricing_text": "Pricing: 85 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9",
+          "match_input_image"
+        ],
+        "type": "string"
+      },
+      "negative_prompt": {
+        "description": "What to avoid in the generated image.",
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 3) for image editing and multi-image fusion. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Use aspect_ratio \"match_input_image\" to keep the input's aspect ratio.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      },
+      "size": {
+        "default": "1.5K",
+        "description": "Output resolution tier.",
+        "enum": [
+          "1K",
+          "1.5K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

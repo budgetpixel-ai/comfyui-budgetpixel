@@ -1,0 +1,54 @@
+{
+  "id": "p-image-upscale",
+  "kind": "upscale",
+  "path": "/upscales/p-image-upscale",
+  "poll_path": "/upscales/{id}",
+  "title": "P-Image Upscale",
+  "category": "Upscaling",
+  "summary": "Upscale an image with P-Image Upscale",
+  "description": "Pruna AI P-Image Upscale — fast image upscaling with results in seconds, up to 32 MP output. Priced by the target resolution tier: 4 MP = 10, 8 MP = 15, 16 MP = 30, 32 MP = 60 credits per image.",
+  "pricing_text": "Pricing: 25 credits per generation.",
+  "input": {
+    "properties": {
+      "enhance_details": {
+        "default": false,
+        "description": "Enhance textures and fine detail (may increase contrast).",
+        "type": "boolean"
+      },
+      "enhance_realism": {
+        "default": false,
+        "description": "Improve realism — recommended for AI-generated images.",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Image to upscale. A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "output_format": {
+        "default": "jpg",
+        "description": "Output format (jpg recommended; png files get very large at high megapixel targets).",
+        "enum": [
+          "jpg",
+          "png",
+          "webp"
+        ],
+        "type": "string"
+      },
+      "target": {
+        "default": 4,
+        "description": "Target output resolution in megapixels. Sets the price: 4 MP = 10, 8 MP = 15, 16 MP = 30, 32 MP = 60 credits.",
+        "enum": [
+          4,
+          8,
+          16,
+          32
+        ],
+        "type": "integer"
+      }
+    },
+    "required": [
+      "image"
+    ]
+  }
+}

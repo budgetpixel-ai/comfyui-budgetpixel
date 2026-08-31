@@ -1,0 +1,74 @@
+{
+  "id": "p-video",
+  "kind": "video",
+  "path": "/videos/p-video",
+  "poll_path": "/videos/{id}",
+  "title": "P-Video",
+  "category": "Pruna AI",
+  "summary": "Generate video with P-Video",
+  "description": "Pruna AI P-Video — text-to-video; image-to-video with a start frame and an optional end frame; and audio-driven video from a supplied track. 720p or 1080p, 5 or 10 seconds, optional generated audio. Served by our direct Pruna integration.",
+  "pricing_text": "Pricing: 40 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio. Ignored when a start image already sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string"
+      },
+      "audio": {
+        "description": "Optional driving-audio track (MP3/WAV/FLAC). Provide a public audio URL or an uploaded-file URL from POST /v1/uploads (passed by URL, not inlined). When supplied, the video's length matches the audio and `length_seconds` is ignored — which changes the per-second charge, so estimate via POST /v1/cost.",
+        "type": "string",
+        "x-bpx-media": "audio"
+      },
+      "end_image": {
+        "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "default": true,
+        "description": "Keep the model's generated audio in the output (default true; no price impact).",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds. Ignored when `audio` is supplied.",
+        "enum": [
+          5,
+          10
+        ],
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution.",
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

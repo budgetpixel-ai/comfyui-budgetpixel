@@ -1,0 +1,98 @@
+{
+  "id": "wan-3.0-video-prime",
+  "kind": "video",
+  "path": "/videos/wan-3.0-video-prime",
+  "poll_path": "/videos/{id}",
+  "title": "Wan 3.0 Prime",
+  "category": "Alibaba",
+  "summary": "Generate video with Wan 3.0 Prime",
+  "description": "Alibaba Wan 3.0 Prime — the high-speed tier of Wan 3.0 with significantly faster end-to-end generation and the same all-in-one capabilities: text-to-video; image-to-video (first + optional last frame); and reference-to-video mixing up to 10 reference images, up to 5 reference video clips (15s combined) for editing/replication/extension, and up to 5 reference audio clips (15s combined). Reference media can't be combined with start/end frames. 480p/720p/1080p, priced per OUTPUT second by resolution (input media is free — see `resolution_pricing` in GET /v1/models); any duration 2-30 seconds (input video + output ≤ 30s); optional audio.",
+  "pricing_text": "Pricing: 170 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "adaptive",
+        "description": "Aspect ratio, honored in every mode (an explicit ratio reframes the output even with a first frame or reference media). \"adaptive\" (default) lets the model pick a suitable ratio from the inputs and prompt intent.",
+        "enum": [
+          "adaptive",
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional last frame, used together with `image` (the first frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "default": true,
+        "description": "Generate audio with the video (default true; no price impact).",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional first frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video. Can't be combined with reference media.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Output video length in seconds (2-30). With reference videos, input duration + output length must not exceed 30 seconds.",
+        "maximum": 30,
+        "minimum": 2,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video, or the edit instruction when reference videos are supplied. In reference mode, address assets by order: \"Image 1\", \"Video 1\", \"Audio 1\".",
+        "type": "string"
+      },
+      "reference_audios": {
+        "description": "Optional reference audio clips (up to 5; each 2-15s, 15s combined; WAV/MP3) that guide sound/voice. Free. Each item is a public audio URL or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 5,
+        "type": "array",
+        "x-bpx-media": "audio"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 10, free) that guide identity/style/scene in reference-to-video mode. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "reference_videos": {
+        "description": "Optional reference video clips (up to 5; each 2-15s, 15s combined; MP4/MOV, ≤50MB each) for editing, effect/camera replication, and extension. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Free — only OUTPUT seconds are billed — but input video duration + `length_seconds` must not exceed 30. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 5,
+        "type": "array",
+        "x-bpx-media": "video"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

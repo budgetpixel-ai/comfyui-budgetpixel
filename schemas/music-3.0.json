@@ -1,0 +1,43 @@
+{
+  "id": "music-3.0",
+  "kind": "audio",
+  "path": "/audios/music-3.0",
+  "poll_path": "/audios/{id}",
+  "title": "Music 3.0",
+  "category": "Music",
+  "summary": "Generate music with Music 3.0",
+  "description": "MiniMax Music 3.0 — the latest MiniMax music model: full-length songs from a style prompt and/or your own lyrics. Lyrics optimizer can write or polish lyrics from the prompt; instrumental mode skips vocals. WAV or MP3 output.",
+  "pricing_text": "Pricing: 200 credits per generation.",
+  "input": {
+    "properties": {
+      "format": {
+        "default": "wav",
+        "description": "Output audio format. Defaults to wav (lossless); choose mp3 for a smaller file.",
+        "enum": [
+          "wav",
+          "mp3"
+        ],
+        "type": "string"
+      },
+      "instrumental": {
+        "default": false,
+        "description": "Generate an instrumental track (no vocals).",
+        "type": "boolean"
+      },
+      "lyrics": {
+        "description": "Lyrics to sing (1-3500 characters). Required unless instrumental is true or lyrics_optimizer is true (the optimizer writes lyrics from the prompt).",
+        "type": "string"
+      },
+      "lyrics_optimizer": {
+        "default": true,
+        "description": "Let the model write or polish lyrics from the prompt. Default true.",
+        "type": "boolean"
+      },
+      "prompt": {
+        "description": "Style/mood description of the track (up to 2000 characters). Optional when lyrics are provided.",
+        "type": "string"
+      }
+    },
+    "required": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "sonilo-video-music",
+  "kind": "audio",
+  "path": "/audios/sonilo-video-music",
+  "poll_path": "/audios/{id}",
+  "title": "Sonilo Video Music",
+  "category": "Music",
+  "summary": "Generate music with Sonilo Video Music",
+  "description": "Sonilo video-to-music — a licensed soundtrack composed for an input video (up to 6 minutes): the music follows the clip's content, pacing and mood. Returns the music track (`audio_url`, MP3 or WAV) sized to the video. Priced per second of the input video's measured duration (whole seconds, 10-second minimum) — see GET /v1/models for the rate.",
+  "pricing_text": "Pricing: 15 credits per second (10s minimum).",
+  "input": {
+    "properties": {
+      "format": {
+        "default": "mp3",
+        "description": "Output audio format.",
+        "enum": [
+          "mp3",
+          "wav"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Optional direction for the music (up to 2000 characters): genre, mood, instrumentation, business context — e.g. \"warm acoustic indie, builds gently, no vocals\".",
+        "type": "string"
+      },
+      "video": {
+        "description": "The input video (MP4/WebM, up to 360 seconds, 30 MB remote-fetch cap). A public video URL, an uploaded-file URL from POST /v1/uploads, a data URI, or raw base64. Its duration is measured server-side and is the billing basis.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "video"
+    ]
+  }
+}

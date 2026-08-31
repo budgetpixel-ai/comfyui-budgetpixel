@@ -1,0 +1,38 @@
+{
+  "id": "sonilo-sfx",
+  "kind": "audio",
+  "path": "/audios/sonilo-sfx",
+  "poll_path": "/audios/{id}",
+  "title": "Sonilo SFX",
+  "category": "Sound Effects",
+  "summary": "Generate sound effect with Sonilo SFX",
+  "description": "Sonilo text-to-sound-effect — Foley, ambience, UI sounds, transitions, impacts and action effects from a short description, 1-180 seconds long. Priced per second of the requested duration with a 3-second minimum (see GET /v1/models for the rate; POST /v1/cost quotes the exact price). MP3 or WAV output.",
+  "pricing_text": "Pricing: 5 credits per second (3s minimum).",
+  "input": {
+    "properties": {
+      "duration": {
+        "default": 10,
+        "description": "Length of the effect in seconds (1-180). Billed per second with a 3-second minimum.",
+        "maximum": 180,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "format": {
+        "default": "mp3",
+        "description": "Output audio format.",
+        "enum": [
+          "mp3",
+          "wav"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Description of the sound effect (up to 1000 characters), e.g. \"heavy rain on a tin roof with distant thunder\".",
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

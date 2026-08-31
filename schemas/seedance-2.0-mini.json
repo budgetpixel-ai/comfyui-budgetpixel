@@ -1,0 +1,84 @@
+{
+  "id": "seedance-2.0-mini",
+  "kind": "video",
+  "path": "/videos/seedance-2.0-mini",
+  "poll_path": "/videos/{id}",
+  "title": "SeeDance 2.0 Mini",
+  "category": "ByteDance (SeeDance)",
+  "summary": "Generate video with SeeDance 2.0 Mini",
+  "description": "ByteDance SeeDance 2.0 Mini — the same modes as SeeDance 2.0 (text / image / reference / video-to-video) at the best cost-performance. Resolutions 480p and 720p (see `resolution_pricing` in GET /v1/models). Optional audio.",
+  "pricing_text": "Pricing: 120 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio. Ignored when an input image or video already sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9"
+        ],
+        "type": "string"
+      },
+      "audio": {
+        "description": "Optional reference audio (MP3/WAV/OGG) for the generated video. Provide a public audio URL or an uploaded-file URL from POST /v1/uploads (passed by URL, not inlined). Must accompany an image (`image` or `reference_images`) or a `video` input — audio can't be the only input.",
+        "type": "string",
+        "x-bpx-media": "audio"
+      },
+      "end_image": {
+        "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "description": "Generate audio with the video.",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds (4–15).",
+        "maximum": 15,
+        "minimum": 4,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images that guide the generated video. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image` (start/end frames). Up to 9 on their own (reference-images-to-video); may also accompany a `video` to guide a video-edit, in which case up to 6 are used.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "type": "string"
+      },
+      "video": {
+        "description": "Optional input video for video-to-video editing (2-15s, ≤100MB). Provide a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). When set, the request runs in video-edit mode; you may also pass `reference_images` (up to 6) and/or an `audio` track to guide the edit. Not combinable with `image`/`end_image`. Billed on the INPUT duration at half the output per-second rate in addition to the output — estimate via POST /v1/cost.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

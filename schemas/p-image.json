@@ -1,0 +1,47 @@
+{
+  "id": "p-image",
+  "kind": "image",
+  "path": "/images/p-image",
+  "poll_path": "/images/{id}",
+  "title": "P-Image",
+  "category": "Pruna AI",
+  "summary": "Generate image with P-Image",
+  "description": "Pruna AI P-Image — an optimised Qwen-based text-to-image model generating 1-megapixel images in about a second. Built for rapid iteration at very low cost.",
+  "pricing_text": "Pricing: 10 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate. This model returns a single image per request.",
+        "maximum": 1,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate. The model automatically enhances prompts for better results.",
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

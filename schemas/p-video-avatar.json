@@ -1,0 +1,42 @@
+{
+  "id": "p-video-avatar",
+  "kind": "lip-sync",
+  "path": "/lip-sync/p-video-avatar",
+  "poll_path": "/lip-sync/{id}",
+  "title": "P-Video Avatar",
+  "category": "Lip Sync",
+  "summary": "Lip sync with P-Video Avatar",
+  "description": "P-Video Avatar — a talking avatar from one image and a speech clip. Priced per second of the input audio, rounded UP to whole seconds, by output resolution: 40 credits/second at 720p, 60 credits/second at 1080p (e.g. a 12.4s clip at 1080p bills as 13s x 60).",
+  "pricing_text": "Pricing: 40 credits per second.",
+  "input": {
+    "properties": {
+      "audio": {
+        "description": "The speech/audio to lip-sync (mp3/wav, up to 30 seconds, max 5 MB). A public audio URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "type": "string",
+        "x-bpx-media": "audio"
+      },
+      "image": {
+        "description": "The avatar image (a person facing the camera works best). A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. jpg/png/webp.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution — sets the per-second price (720p = 40, 1080p = 60 credits/second).",
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      },
+      "video_prompt": {
+        "description": "Optional visual prompt describing how the person should appear or behave while speaking.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "image",
+      "audio"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "kling-v3",
+  "kind": "image",
+  "path": "/images/kling-v3",
+  "poll_path": "/images/{id}",
+  "title": "Kling v3",
+  "category": "Kling",
+  "summary": "Generate image with Kling v3",
+  "description": "Kling AI v3 — image generation with strong prompt adherence and aesthetics. Text-to-image and single-reference-image generation at 1K/2K. Billing: 35 credits per image.",
+  "pricing_text": "Pricing: 35 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9"
+        ],
+        "type": "string"
+      },
+      "image": {
+        "description": "Optional reference image the generation should follow (subject/feature reference). Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "negative_prompt": {
+        "description": "What to avoid in the generated image. Text-to-image only — ignored when \"image\" is provided.",
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output resolution tier.",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

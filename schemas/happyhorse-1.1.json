@@ -1,0 +1,64 @@
+{
+  "id": "happyhorse-1.1",
+  "kind": "video",
+  "path": "/videos/happyhorse-1.1",
+  "poll_path": "/videos/{id}",
+  "title": "HappyHorse 1.1",
+  "category": "Alibaba",
+  "summary": "Generate video with HappyHorse 1.1",
+  "description": "Alibaba HappyHorse 1.1 — highly realistic dynamic rendering. Text-to-video; image-to-video (start frame only); and reference-images-to-video (up to 9 images for subject-consistent generation). 720p or 1080p, priced per resolution (see `resolution_pricing` in GET /v1/models); 4–15 seconds. Audio is determined by the model (no toggle). No video-edit mode.",
+  "pricing_text": "Pricing: 170 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio. Ignored when a start image already sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video. Can't be combined with `reference_images`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds (4–15).",
+        "maximum": 15,
+        "minimum": 4,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (1–9) for subject-consistent reference-to-video. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image` (the start frame).",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

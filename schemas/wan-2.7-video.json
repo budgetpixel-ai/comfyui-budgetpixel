@@ -1,0 +1,87 @@
+{
+  "id": "wan-2.7-video",
+  "kind": "video",
+  "path": "/videos/wan-2.7-video",
+  "poll_path": "/videos/{id}",
+  "title": "Wan 2.7",
+  "category": "Alibaba",
+  "summary": "Generate video with Wan 2.7",
+  "description": "Alibaba Wan 2.7 (video) — text-to-video; image-to-video with a start frame and an optional end frame; and video editing (supply a `video`). Prompt-driven narrative, optional generated audio, and an optional driving-audio track. 720p or 1080p, priced per resolution (see `resolution_pricing` in GET /v1/models); 5, 10, or 15 seconds. Video editing instead takes its length from the input clip (`length_seconds` and `aspect_ratio` are ignored) and bills the INPUT duration on top of the output at the same per-second rate — so a 10s clip costs 20 seconds' worth; estimate via POST /v1/cost. (The Wan 2.7 image model is `wan-2.7` under POST /v1/images.)",
+  "pricing_text": "Pricing: 100 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio. Ignored when a start image or an input `video` already sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string"
+      },
+      "audio": {
+        "description": "Optional driving-audio track (MP3/WAV/OGG) for the generated video. Provide a public audio URL or an uploaded-file URL from POST /v1/uploads (passed by URL, not inlined). Ignored when `generate_audio` is false.",
+        "type": "string",
+        "x-bpx-media": "audio"
+      },
+      "end_image": {
+        "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "default": true,
+        "description": "Generate audio with the video (default true; no price impact).",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video. Can't be combined with `video`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds. Ignored for video editing, which inherits the input clip's length.",
+        "enum": [
+          5,
+          10,
+          15
+        ],
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video, or the edit instruction when `video` is supplied (for example \"change the video to an 8-bit pixel style\").",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 4, free) used only with `video` — they guide the edit, for example supplying the person or style to apply to the clip. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 4,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      },
+      "video": {
+        "description": "Optional input video to edit (2-15s, MP4/MOV, ≤100MB). Supplying it switches the request to video editing: the model applies `prompt` to this clip. Provide a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed on the INPUT duration at the full per-second rate in addition to the output — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

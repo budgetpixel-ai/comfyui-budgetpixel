@@ -1,0 +1,53 @@
+{
+  "id": "kling-3.0-turbo",
+  "kind": "video",
+  "path": "/videos/kling-3.0-turbo",
+  "poll_path": "/videos/{id}",
+  "title": "Kling 3.0 Turbo",
+  "category": "Kling",
+  "summary": "Generate video with Kling 3.0 Turbo",
+  "description": "Kuaishou Kling 3.0 Turbo — fast text-to-video and image-to-video (start frame only) with native audio always included. 720p or 1080p, priced per resolution (see `resolution_pricing` in GET /v1/models). Any duration from 3 to 15 seconds.",
+  "pricing_text": "Pricing: 120 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio. Ignored when a start image already sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds (3–15).",
+        "maximum": 15,
+        "minimum": 3,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

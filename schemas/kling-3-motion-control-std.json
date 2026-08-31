@@ -1,0 +1,48 @@
+{
+  "id": "kling-3-motion-control-std",
+  "kind": "motion-control",
+  "path": "/motion-control/kling-3-motion-control-std",
+  "poll_path": "/motion-control/{id}",
+  "title": "Kling 3.0 Motion Control Standard",
+  "category": "Motion Control",
+  "summary": "Motion control with Kling 3.0 Motion Control Standard",
+  "description": "Kling 3.0 motion control (standard tier) — transfers the motion from a reference video onto a character image. Priced per second of the reference video (130 credits/second).",
+  "pricing_text": "Pricing: 130 credits per second.",
+  "input": {
+    "properties": {
+      "character_orientation": {
+        "default": "video",
+        "description": "Take the character's orientation from the reference video or from the image. With \"image\", the reference video must be 10 seconds or less.",
+        "enum": [
+          "video",
+          "image"
+        ],
+        "type": "string"
+      },
+      "image": {
+        "description": "Character image to animate. A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. jpg/png/webp.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "keep_original_sound": {
+        "default": true,
+        "description": "Keep the original audio from the reference video.",
+        "type": "boolean"
+      },
+      "prompt": {
+        "default": "Replace the characters in the video with the characters from the image, while strictly maintaining the characters' movements.",
+        "description": "How the character should be animated.",
+        "type": "string"
+      },
+      "video": {
+        "description": "Motion reference video whose movement drives the character. A public video URL or an uploaded-file URL from POST /v1/uploads. mp4/webm, 3-30 seconds (max 10 seconds when character_orientation is \"image\"), up to 30 MB.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "image",
+      "video"
+    ]
+  }
+}

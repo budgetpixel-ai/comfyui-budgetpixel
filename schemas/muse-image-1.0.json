@@ -1,0 +1,74 @@
+{
+  "id": "muse-image-1.0",
+  "kind": "image",
+  "path": "/images/muse-image-1.0",
+  "poll_path": "/images/{id}",
+  "title": "Muse Image 1.0",
+  "category": "Meta",
+  "summary": "Generate image with Muse Image 1.0",
+  "description": "Meta Muse Image 1.0 — agentic image generation: the model can ground your prompt with web and image search and run code for charts, tables and text layouts before rendering (all included). Excellent typography and factual accuracy, ~2K output. Text-to-image, image editing, and multi-reference composition from up to 4 input images. Flat 12 credits per image.",
+  "pricing_text": "Pricing: 12 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "2:1",
+          "1:2",
+          "match_input_image"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "output_format": {
+        "default": "webp",
+        "description": "Output image format.",
+        "enum": [
+          "webp",
+          "png",
+          "jpeg"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "quality": {
+        "default": "high",
+        "description": "Reasoning strength. \"high\" (default) refines the image over multiple passes and uses the model's search grounding fully — better output, slower. \"low\" responds faster. Both bill the same 12 credits per image.",
+        "enum": [
+          "high",
+          "low"
+        ],
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional input images (up to 4) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. An edit follows the input image's frame unless aspect_ratio forces one.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 4,
+        "type": "array",
+        "x-bpx-media": "image"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

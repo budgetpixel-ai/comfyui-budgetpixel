@@ -1,0 +1,56 @@
+{
+  "id": "flux-2-dev",
+  "kind": "image",
+  "path": "/images/flux-2-dev",
+  "poll_path": "/images/{id}",
+  "title": "FLUX 2 Dev",
+  "category": "Black Forest Labs",
+  "summary": "Generate image with FLUX 2 Dev",
+  "description": "Black Forest Labs FLUX 2 Dev — next-generation FLUX quality with multi-reference image editing (up to 4 reference images) and seed control.",
+  "pricing_text": "Pricing: 25 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "9:16",
+          "16:9",
+          "2:3",
+          "3:2"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 4) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 4,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

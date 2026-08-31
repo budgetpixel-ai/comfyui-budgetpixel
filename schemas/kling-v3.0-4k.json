@@ -1,0 +1,53 @@
+{
+  "id": "kling-v3.0-4k",
+  "kind": "video",
+  "path": "/videos/kling-v3.0-4k",
+  "poll_path": "/videos/{id}",
+  "title": "Kling 3.0 4K",
+  "category": "Kling",
+  "summary": "Generate video with Kling 3.0 4K",
+  "description": "Kuaishou Kling 3.0 at native 4K resolution — text-to-video, plus image-to-video with a start frame and an optional end frame. Any duration from 3 to 15 seconds. Optional audio (no price impact at 4K).",
+  "pricing_text": "Pricing: 450 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio. Ignored when a start image already sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "description": "Generate audio with the video. Raises the per-second rate on Standard/Pro (no price impact at 4K) — estimate via POST /v1/cost.",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds (3–15).",
+        "maximum": 15,
+        "minimum": 3,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

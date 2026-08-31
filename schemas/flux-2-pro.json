@@ -1,0 +1,63 @@
+{
+  "id": "flux-2-pro",
+  "kind": "image",
+  "path": "/images/flux-2-pro",
+  "poll_path": "/images/{id}",
+  "title": "FLUX 2 Pro",
+  "category": "Black Forest Labs",
+  "summary": "Generate image with FLUX 2 Pro",
+  "description": "Black Forest Labs FLUX 2 Pro — premium quality with megapixel-based resolution and seed control.",
+  "pricing_text": "Pricing: 25 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "9:16",
+          "16:9",
+          "2:3",
+          "3:2"
+        ],
+        "type": "string"
+      },
+      "image": {
+        "description": "Optional image-to-image input. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      },
+      "size": {
+        "default": "1MP",
+        "description": "Output resolution (megapixels).",
+        "enum": [
+          "0.5MP",
+          "1MP",
+          "2MP",
+          "4MP"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

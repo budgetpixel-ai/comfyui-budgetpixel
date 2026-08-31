@@ -1,0 +1,93 @@
+{
+  "id": "seedance-2.5",
+  "kind": "video",
+  "path": "/videos/seedance-2.5",
+  "poll_path": "/videos/{id}",
+  "title": "SeeDance 2.5",
+  "category": "ByteDance (SeeDance)",
+  "summary": "Generate video with SeeDance 2.5",
+  "description": "ByteDance SeeDance 2.5 — flagship multimodal video. Text-to-video; image-to-video (start + optional end frame); and reference-to-video mixing up to 15 reference images (free), up to 5 reference video clips (2-15s each, 30s combined — billed per second of INPUT at half the output rate, see POST /v1/cost), and up to 5 reference audio clips (30s combined, free; audio-only input is supported). Video editing and extension are reference-video modes — no separate edit endpoint. Reference media can't be combined with start/end frames. 480p/720p/1080p, any duration 4-30 seconds, optional audio.",
+  "pricing_text": "Pricing: 330 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio for text-to-video. Ignored (adaptive) when a start frame or any reference media sets the frame.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "description": "Generate audio with the video (no price impact).",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video. Can't be combined with reference media.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Output video length in seconds (4-30).",
+        "maximum": 30,
+        "minimum": 4,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      },
+      "reference_audios": {
+        "description": "Optional reference audio clips (up to 5; each 2-15s, 30s combined; WAV/MP3) that guide sound/voice. Audio-only input is supported. Each item is a public audio URL or an uploaded-file URL from POST /v1/uploads. Free — no input billing. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 5,
+        "type": "array",
+        "x-bpx-media": "audio"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 15, free) that guide identity/style in reference-to-video mode. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 15,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "reference_videos": {
+        "description": "Optional reference video clips (up to 5; each 2-15s, 30s combined; MP4/MOV, ≤50MB each) for editing, extension, and motion/identity guidance. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed on the INPUT duration at half the output per-second rate (80/sec at 480p, 160/sec at 720p, 375/sec at 1080p) in addition to the output — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 5,
+        "type": "array",
+        "x-bpx-media": "video"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

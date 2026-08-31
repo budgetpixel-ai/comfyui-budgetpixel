@@ -1,0 +1,41 @@
+{
+  "id": "topazlabs-video-upscale",
+  "kind": "video-upscale",
+  "path": "/video-upscales/topazlabs-video-upscale",
+  "poll_path": "/video-upscales/{id}",
+  "title": "Topaz Labs Video Upscale",
+  "category": "Upscaling",
+  "summary": "Upscale a video with Topaz Labs Video Upscale",
+  "description": "Topaz Labs professional-grade AI video upscaling to 1080p or 4K at 30 or 60 fps. Priced per second of the INPUT video by target tier: 1080p30 = 15, 1080p60 = 30, 4K30 = 60, 4K60 = 120 credits/second (input up to 20 seconds, ≤100MB).",
+  "pricing_text": "Pricing: 25 credits per generation.",
+  "input": {
+    "properties": {
+      "target_fps": {
+        "default": 30,
+        "description": "Target frame rate. 60 fps doubles the per-second rate.",
+        "enum": [
+          30,
+          60
+        ],
+        "type": "integer"
+      },
+      "target_resolution": {
+        "default": "1080p",
+        "description": "Target output resolution. Sets the per-second rate together with target_fps.",
+        "enum": [
+          "1080p",
+          "4k"
+        ],
+        "type": "string"
+      },
+      "video": {
+        "description": "The video to upscale (up to 20 seconds, MP4/MOV/WebM, ≤100MB). A public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined).",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "video"
+    ]
+  }
+}

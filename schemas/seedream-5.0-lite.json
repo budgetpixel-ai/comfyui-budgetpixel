@@ -1,0 +1,79 @@
+{
+  "id": "seedream-5.0-lite",
+  "kind": "image",
+  "path": "/images/seedream-5.0-lite",
+  "poll_path": "/images/{id}",
+  "title": "SeeDream 5.0 Lite",
+  "category": "Bytedance",
+  "summary": "Generate image with SeeDream 5.0 Lite",
+  "description": "ByteDance SeeDream 5.0 Lite — fast unified text-to-image and image editing with multi-reference composition from up to 9 reference images, 2K/3K output, and grouped sequential generation.",
+  "pricing_text": "Pricing: 40 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "2:3",
+          "3:2",
+          "21:9",
+          "9:21"
+        ],
+        "type": "string"
+      },
+      "max_images": {
+        "default": 1,
+        "description": "Ceiling for grouped generation when sequential_image_generation is \"auto\": the model returns up to this many related images and decides the exact count (not guaranteed to be exactly this many). You are billed per image returned.",
+        "maximum": 14,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 9) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "sequential_image_generation": {
+        "default": "disabled",
+        "description": "Set to \"auto\" to return a group of related images (up to max_images); \"disabled\" (default) returns a single image.",
+        "enum": [
+          "disabled",
+          "auto"
+        ],
+        "type": "string"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output resolution.",
+        "enum": [
+          "2K",
+          "3K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

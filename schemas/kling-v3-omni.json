@@ -1,0 +1,63 @@
+{
+  "id": "kling-v3-omni",
+  "kind": "image",
+  "path": "/images/kling-v3-omni",
+  "poll_path": "/images/{id}",
+  "title": "Kling v3 Omni",
+  "category": "Kling",
+  "summary": "Generate image with Kling v3 Omni",
+  "description": "Kling AI v3 Omni — unified text-to-image and image editing with multi-reference composition from up to 9 reference images and up to 4K output. Billing: 35 credits per image at 1K/2K, 60 at 4K.",
+  "pricing_text": "Pricing: 35 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 9) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output resolution tier. 1K/2K bill 35 credits per image; 4K bills 60.",
+        "enum": [
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

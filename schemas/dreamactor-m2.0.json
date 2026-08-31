@@ -1,0 +1,34 @@
+{
+  "id": "dreamactor-m2.0",
+  "kind": "motion-control",
+  "path": "/motion-control/dreamactor-m2.0",
+  "poll_path": "/motion-control/{id}",
+  "title": "DreamActor M2.0",
+  "category": "Motion Control",
+  "summary": "Motion control with DreamActor M2.0",
+  "description": "BytePlus DreamActor M2.0 — drives the character in an image to replicate the motion, facial expressions, and lip movements from a reference video, preserving the subject and background of the image. Works for real people, animation, and pets. 720p MP4 output. Priced per second of the reference video (50 credits/second).",
+  "pricing_text": "Pricing: 50 credits per second.",
+  "input": {
+    "properties": {
+      "image": {
+        "description": "Character image to animate (the subject). A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. jpg/png, max 4.7 MB; 480x480 to 1920x1080 (larger images are scaled down).",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "trim_intro": {
+        "default": true,
+        "description": "Trim the 1-second transition at the start of the output video.",
+        "type": "boolean"
+      },
+      "video": {
+        "description": "Motion reference video whose movement drives the character. A public video URL or an uploaded-file URL from POST /v1/uploads. mp4/webm, 3-30 seconds, up to 30 MB.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "image",
+      "video"
+    ]
+  }
+}

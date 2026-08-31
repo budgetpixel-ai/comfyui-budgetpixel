@@ -1,0 +1,49 @@
+{
+  "id": "qwen-image",
+  "kind": "image",
+  "path": "/images/qwen-image",
+  "poll_path": "/images/{id}",
+  "title": "Qwen-Image",
+  "category": "Alibaba",
+  "summary": "Generate image with Qwen-Image",
+  "description": "Alibaba Qwen-Image — best-in-class complex text rendering and typography. Text-to-image with seed control.",
+  "pricing_text": "Pricing: 15 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "21:9",
+          "9:21",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

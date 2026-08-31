@@ -1,0 +1,55 @@
+{
+  "id": "kling-v2.6-pro",
+  "kind": "video",
+  "path": "/videos/kling-v2.6-pro",
+  "poll_path": "/videos/{id}",
+  "title": "Kling v2.6 Pro",
+  "category": "Kling",
+  "summary": "Generate video with Kling v2.6 Pro",
+  "description": "Kuaishou Kling v2.6 Pro — text-to-video, plus image-to-video with a start frame and an optional end frame. Optional audio.",
+  "pricing_text": "Pricing: 150 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "description": "Generate audio with the video.",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds.",
+        "enum": [
+          5,
+          10
+        ],
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}
