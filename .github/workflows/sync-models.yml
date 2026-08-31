@@ -1,17 +1,17 @@
 name: sync models from API
 
-# Keeps the node pack in lockstep with the BudgetPixel API: regenerates the
-# schema snapshots from the live OpenAPI spec and opens a PR when anything
-# changed (new models, new params, price changes). Merge the PR, bump the
-# version in pyproject.toml, and the publish workflow ships it.
+# Regenerates the schema snapshots from the live OpenAPI spec and opens a PR
+# when anything changed (new models, new params, price changes). Merge the PR,
+# bump the version in pyproject.toml, and the publish workflow ships it.
+#
+# Manual-trigger only for now (Actions tab → run workflow). To automate later,
+# add back a `schedule:` cron block.
 #
 # Secrets: BUDGETPIXEL_API_KEY (optional but recommended) — adds pricing text
 # and filters to API-available models, exactly like a local codegen run.
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 6 * * 1" # Mondays 06:17 UTC
 
 permissions:
   contents: write
@@ -20,7 +20,7 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'budgetpixel-ai/ComfyUI-BudgetPixel' }}
+    if: ${{ github.repository == 'budgetpixel-ai/comfyui-budgetpixel' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

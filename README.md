@@ -1,4 +1,4 @@
-# ComfyUI-BudgetPixel
+# comfyui-budgetpixel
 
 Official [BudgetPixel](https://budgetpixel.com) nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI): generate with 60+ hosted image, video, music and sound-effect models — FLUX 2, Seedream 5.0, Qwen-Image 3.0, Kling v3, Nano Banana, GPT-Image, Seedance, Wan, and more — straight from your graph, using your BudgetPixel API key. No local GPU or model downloads needed for these nodes.
 
@@ -12,8 +12,8 @@ Official [BudgetPixel](https://budgetpixel.com) nodes for [ComfyUI](https://gith
 
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/budgetpixel-ai/ComfyUI-BudgetPixel.git
-pip install -r ComfyUI-BudgetPixel/requirements.txt
+git clone https://github.com/budgetpixel-ai/comfyui-budgetpixel.git
+pip install -r comfyui-budgetpixel/requirements.txt
 ```
 
 ## API key
@@ -21,7 +21,7 @@ pip install -r ComfyUI-BudgetPixel/requirements.txt
 The nodes call the [BudgetPixel API](https://docs.budgetpixel.com), which is included in **every paid plan**. [Create a key](https://budgetpixel.com/settings/api-keys?utm_source=comfyui) and provide it one of two ways:
 
 - environment variable: `BUDGETPIXEL_API_KEY=bpx_live_...`
-- a `budgetpixel.json` file inside the `ComfyUI-BudgetPixel` folder:
+- a `budgetpixel.json` file inside the `comfyui-budgetpixel` folder:
 
 ```json
 { "api_key": "bpx_live_..." }
@@ -53,8 +53,8 @@ Generations are billed in BudgetPixel credits from your plan, identically to the
 
 Nodes are built at import time from committed `schemas/*.json` snapshots of the [public OpenAPI spec](https://api.budgetpixel.com/v1/openapi.yaml) — adding a model to the pack is a JSON diff, not new Python. Three ways they update:
 
-1. **Automatic**: the `sync models from API` workflow runs weekly (and on demand) — it regenerates the schemas from the live spec and opens a PR when models or params changed. Merge, bump the version in `pyproject.toml`, and the publish workflow ships to the Comfy Registry.
-2. **Manual**: `python scripts/generate_schemas.py` (add `BUDGETPIXEL_API_KEY` for pricing text + availability filtering).
+1. **On demand**: the `sync models from API` workflow (Actions tab → run) regenerates the schemas from the live spec and opens a PR when models or params changed. Merge, bump the version in `pyproject.toml`, and the publish workflow ships to the Comfy Registry.
+2. **Locally**: `python scripts/generate_schemas.py` (add `BUDGETPIXEL_API_KEY` for pricing text + availability filtering).
 3. **Verification**: `python tests/test_nodes_build.py` — offline check that every schema builds a well-formed node (no ComfyUI/torch needed); runs in CI on every PR.
 
 `scripts/e2e_smoke.py` / `scripts/e2e_node.py` are live end-to-end tests against a real API (they spend credits; use a test account).

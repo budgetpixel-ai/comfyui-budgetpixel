@@ -13,7 +13,7 @@ jobs:
   publish-node:
     name: Publish custom node to the registry
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'budgetpixel-ai/ComfyUI-BudgetPixel' }}
+    if: ${{ github.repository == 'budgetpixel-ai/comfyui-budgetpixel' }}
     steps:
       - uses: actions/checkout@v4
       - name: Publish

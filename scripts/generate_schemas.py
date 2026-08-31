@@ -54,7 +54,7 @@ def read_spec(source):
 def fetch_models(base_url, key):
     req = urllib.request.Request(
         base_url.rstrip("/") + "/models",
-        headers={"Authorization": "Bearer " + key, "User-Agent": "ComfyUI-BudgetPixel-codegen"},
+        headers={"Authorization": "Bearer " + key, "User-Agent": "comfyui-budgetpixel-codegen"},
     )
     with urllib.request.urlopen(req, timeout=60) as resp:
         data = json.loads(resp.read())

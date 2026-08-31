@@ -55,7 +55,7 @@ def get_api_key():
         return cfg.strip()
     raise MissingAPIKeyError(
         "No BudgetPixel API key found. Set the BUDGETPIXEL_API_KEY environment "
-        "variable, or create budgetpixel.json next to the ComfyUI-BudgetPixel "
+        "variable, or create budgetpixel.json inside the comfyui-budgetpixel "
         'folder containing {"api_key": "bpx_live_..."}. Create a key (any paid '
         "plan) at " + KEYS_URL
     )

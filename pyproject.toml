@@ -7,7 +7,7 @@ dependencies = ["requests"]
 requires-python = ">=3.9"
 
 [project.urls]
-Repository = "https://github.com/budgetpixel-ai/ComfyUI-BudgetPixel"
+Repository = "https://github.com/budgetpixel-ai/comfyui-budgetpixel"
 Documentation = "https://docs.budgetpixel.com/comfyui"
 Homepage = "https://budgetpixel.com/plugins/comfyui"
 

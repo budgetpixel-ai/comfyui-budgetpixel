@@ -1,4 +1,4 @@
-"""ComfyUI-BudgetPixel — official BudgetPixel nodes for ComfyUI.
+"""comfyui-budgetpixel — official BudgetPixel nodes for ComfyUI.
 
 Node classes are built at import time from the committed schemas/ JSON snapshots
 of the public /v1 API (see bpx/schema_to_node.py). A broken schema file skips

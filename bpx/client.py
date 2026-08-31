@@ -12,7 +12,7 @@ import requests
 from . import VERSION
 from .config import KEYS_URL, PRICING_URL, get_api_key, get_base_url
 
-USER_AGENT = "ComfyUI-BudgetPixel/" + VERSION
+USER_AGENT = "comfyui-budgetpixel/" + VERSION
 
 # Server-side request-body cap is 45 MiB; stay under it with headroom. Larger
 # media goes through POST /v1/uploads instead of inline base64.
