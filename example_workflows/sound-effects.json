@@ -1,0 +1,51 @@
+{
+  "id": "bpx-sound-effects",
+  "revision": 0,
+  "last_node_id": 2,
+  "last_link_id": 1,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "BudgetPixel_sonilo-sfx",
+      "pos": [80, 160],
+      "size": [420, 260],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "audio", "type": "AUDIO", "links": [1], "slot_index": 0},
+        {"name": "video", "type": "VIDEO", "links": null, "slot_index": 1}
+      ],
+      "properties": {"Node name for S&R": "BudgetPixel_sonilo-sfx"},
+      "widgets_values": [
+        "heavy wooden door creaks open slowly, old hinges, stone castle reverb",
+        8,
+        "mp3",
+        false
+      ]
+    },
+    {
+      "id": 2,
+      "type": "SaveAudio",
+      "pos": [560, 160],
+      "size": [360, 140],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {"name": "audio", "type": "AUDIO", "link": 1}
+      ],
+      "outputs": [],
+      "properties": {"Node name for S&R": "SaveAudio"},
+      "widgets_values": ["audio/BudgetPixel"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "AUDIO"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
