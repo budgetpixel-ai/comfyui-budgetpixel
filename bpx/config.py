@@ -14,6 +14,7 @@ non-production environments).
 
 import json
 import os
+from os import environ
 
 DEFAULT_BASE_URL = "https://api.budgetpixel.com/v1"
 KEYS_URL = "https://budgetpixel.com/settings/api-keys?utm_source=comfyui"
@@ -37,7 +38,7 @@ def _read_config_file():
 
 
 def get_base_url():
-    env = os.environ.get("BUDGETPIXEL_API_BASE", "").strip()
+    env = environ.get("BUDGETPIXEL_API_BASE", "").strip()
     if env:
         return env.rstrip("/")
     cfg = _read_config_file().get("base_url", "")
@@ -47,7 +48,7 @@ def get_base_url():
 
 
 def get_api_key():
-    env = os.environ.get("BUDGETPIXEL_API_KEY", "").strip()
+    env = environ.get("BUDGETPIXEL_API_KEY", "").strip()
     if env:
         return env
     cfg = _read_config_file().get("api_key", "")

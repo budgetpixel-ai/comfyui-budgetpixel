@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-budgetpixel"
 description = "Official BudgetPixel nodes for ComfyUI — generate images, video, music and sound effects with 60+ hosted models (FLUX, Seedream, Kling, Seedance, Wan, and more) using your BudgetPixel API key."
-version = "0.1.2"
+version = "0.1.3"
 license = { file = "LICENSE" }
 dependencies = ["requests"]
 requires-python = ">=3.9"
