@@ -1,0 +1,89 @@
+{
+  "id": "gpt-image-2.5-flare",
+  "kind": "image",
+  "path": "/images/gpt-image-2.5-flare",
+  "poll_path": "/images/{id}",
+  "title": "GPT Image 2.5 Flare",
+  "category": "OpenAI",
+  "summary": "Generate image with GPT Image 2.5 Flare",
+  "description": "OpenAI GPT Image 2.5 Flare — the fast, everyday GPT Image model: high-quality generation with natural text rendering and reliable edits at lower latency than Sunburst. Text-to-image and image editing with up to 9 reference images, 1K/2K/4K output and five quality tiers. Billing: per output image, quality × resolution — at 1K: low 30, medium 40, high 80, xhigh 130, max 250 credits; 2K doubles and 4K triples those. Reference images: the first is free, each additional one adds 5 credits. Default quality medium (40 credits at 1K).",
+  "pricing_text": "Pricing: 40 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "5:4",
+          "4:5",
+          "16:9",
+          "9:16",
+          "3:2",
+          "2:3",
+          "21:9",
+          "9:21",
+          "2:1",
+          "1:2"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "output_format": {
+        "default": "png",
+        "description": "Output image format.",
+        "enum": [
+          "png",
+          "jpeg"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string"
+      },
+      "quality": {
+        "default": "medium",
+        "description": "Rendering quality. Per image at 1K: low 30, medium 40, high 80, xhigh 130, max 250 credits (scaled by resolution).",
+        "enum": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 9) for image editing and composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. The first reference is free; each additional one adds 5 credits per generated image.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "resolution": {
+        "default": "1K",
+        "description": "Output resolution tier. 2K bills 2× and 4K 3× the 1K price of the chosen quality.",
+        "enum": [
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}
