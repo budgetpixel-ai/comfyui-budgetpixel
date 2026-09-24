@@ -2,7 +2,7 @@
 
 Official [BudgetPixel](https://budgetpixel.com) nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI): generate with 60+ hosted image, video, music and sound-effect models — FLUX 2, Seedream 5.0, Qwen-Image 3.0, Kling v3, Nano Banana, GPT-Image, Seedance, Wan, and more — straight from your graph, using your BudgetPixel API key. No local GPU or model downloads needed for these nodes.
 
-> Status: **beta** — full API parity: 58 model nodes across image (26), video (17), music & sound effects (8), upscaling (3), lip sync (2) and motion control (2), plus account utilities. Everything the [BudgetPixel API](https://docs.budgetpixel.com) exposes is a node here.
+> Status: **beta** — full API parity: 60 model nodes across image (28), video (17), music & sound effects (8), upscaling (3), lip sync (2) and motion control (2), plus account utilities. Everything the [BudgetPixel API](https://docs.budgetpixel.com) exposes is a node here.
 
 ## Install
 
@@ -34,7 +34,7 @@ Your key is **never stored in workflow JSON** — workflows you share stay safe 
 Everything lives under **Add Node → BudgetPixel**. One node per model — each node's help text shows its credit price, and every widget mirrors the API's typed parameters (enums, ranges, defaults).
 
 - **BudgetPixel/Image** — text-to-image, image editing and multi-reference composition (`FLUX 2 Pro`, `Seedream 5.0 Pro`, `Nano Banana Pro`, …). Image inputs are normal `IMAGE` connections; batches map onto multi-reference models automatically.
-- **BudgetPixel/Video** — text-to-video, image-to-video (start/end frame), reference-to-video and video editing (`Kling v3`, `Seedance 2.5`, `Wan 3.0`, `MiniMax H3`, …). Outputs are core `VIDEO` values — wire into Save Video or frame extractors.
+- **BudgetPixel/Video** — text-to-video, image-to-video (start/end frame), reference-to-video and video editing (`Kling v3`, `Seedance 2.5`, `Wan 3.0`, `MiniMax H3 Max`, `MiniMax H3`, …). Outputs are core `VIDEO` values — wire into Save Video or frame extractors.
 - **BudgetPixel/Audio** — music (`Music 3.0`, `Lyria 3`, `Mureka V9`, …) and sound effects (`Sonilo SFX`). Video-to-SFX and video-to-music take a `VIDEO` input; Sonilo Video SFX also returns the source video with the effects mixed in.
 - **BudgetPixel/Upscale** — image upscalers plus Topaz Labs video upscaling.
 - **BudgetPixel/Lip Sync**, **BudgetPixel/Motion Control** — talking-head sync from `IMAGE`/`VIDEO` + `AUDIO`, and motion transfer from a reference video.

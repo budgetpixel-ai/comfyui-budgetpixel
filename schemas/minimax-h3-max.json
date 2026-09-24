@@ -1,0 +1,105 @@
+{
+  "id": "minimax-h3-max",
+  "kind": "video",
+  "path": "/videos/minimax-h3-max",
+  "poll_path": "/videos/{id}",
+  "title": "MiniMax H3 Max",
+  "category": "MiniMax",
+  "summary": "Generate video with MiniMax H3 Max",
+  "description": "MiniMax H3 Max — the post-trained H3 variant tuned for stronger prompt adherence and aesthetics, with native audio. Text-to-video; image-to-video (start and/or end frame); reference-to-video mixing up to 5 reference images, up to 3 reference video clips (2-15s each, 15s combined — billed per second of INPUT, see POST /v1/cost) and up to 3 reference audio clips (free); and video extension (supply a `video` to continue it). 480p/768p/1080p (2K when extending), any duration 5-15 seconds. Priced per output second by resolution (see `resolution_pricing` in GET /v1/models); reference images beyond the first two add a small per-image charge.",
+  "pricing_text": "Pricing: 105 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "description": "Aspect ratio. Text-to-video uses it directly; image-to-video follows the frame image and ignores it; reference-to-video also accepts \"adaptive\" (the default there); extension accepts \"auto\" (follow the source — the default there) or a ratio to crop to. Defaults: 16:9 for text-to-video.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "adaptive",
+          "auto"
+        ],
+        "type": "string"
+      },
+      "audio": {
+        "description": "Optional soundtrack (≥2s, ≤15MB, MP3/WAV) pinned to a text-to-video or image-to-video output: it replaces the generated audio, trimmed to the video length. Provide a public audio URL or an uploaded-file URL from POST /v1/uploads. Not available with reference media or `video`.",
+        "type": "string",
+        "x-bpx-media": "audio"
+      },
+      "end_image": {
+        "description": "Optional last frame. With `image` the video interpolates between the two frames; on its own it is an end-keyframe generation. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "image": {
+        "description": "Optional first frame for image-to-video — the output follows its framing. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with reference media or `video`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Output length in seconds (5-15). When extending, the seconds of NEW footage appended to the source.",
+        "maximum": 15,
+        "minimum": 5,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video. In reference mode, address assets by order: \"Image 1\", \"Video 1\", \"Audio 1\". When extending, describe what happens next, not the source.",
+        "type": "string"
+      },
+      "reference_audios": {
+        "description": "Optional reference audio clips (up to 3; each 2-15s, 15s combined; WAV/MP3) for sound/voice guidance, addressed as \"Audio 1\"… Each item is a public audio URL or an uploaded-file URL from POST /v1/uploads. Free. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "audio"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 5) for subjects/style in reference-to-video mode, addressed in the prompt as \"Image 1\", \"Image 2\"… The first two are free; each additional image adds 50 credits. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 5,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "reference_videos": {
+        "description": "Optional reference video clips (up to 3; each 2-15s, 15s combined; MP4/MOV, ≤50MB each) for motion/identity guidance, addressed as \"Video 1\"… Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (passed by URL, not inlined). Billed at 170 credits per second of INPUT on top of the output — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "video"
+      },
+      "resolution": {
+        "default": "768p",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models. 2k is only available when extending a `video`.",
+        "enum": [
+          "480p",
+          "768p",
+          "1080p",
+          "2k"
+        ],
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      },
+      "video": {
+        "description": "Optional video to EXTEND (1.6-60s, ≤50MB, aspect ratio between 2:5 and 5:2). The model continues it for `length_seconds` of new footage guided by `prompt`, and the output is the source followed by the continuation. Provide a public video URL or an uploaded-file URL from POST /v1/uploads. Can't be combined with any other media input. The source is billed at 170 credits per second (first 15 seconds) — estimate via POST /v1/cost.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

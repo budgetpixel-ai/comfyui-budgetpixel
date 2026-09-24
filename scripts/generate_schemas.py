@@ -137,6 +137,14 @@ def main():
             continue
 
         op = ops["post"]
+        # Retired models are marked deprecated in the spec. They still have a
+        # path (the endpoint answers 410 naming the successor), but a node built
+        # from one can only ever fail, so it must not ship in the pack. The
+        # models_by_name gate above catches this too when generating against a
+        # live API — this covers generating from a spec file alone.
+        if op.get("deprecated"):
+            skipped_unavailable.append(model_id)
+            continue
         body_schema = (
             op.get("requestBody", {})
             .get("content", {})
