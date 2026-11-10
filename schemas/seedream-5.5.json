@@ -1,0 +1,82 @@
+{
+  "id": "seedream-5.5",
+  "kind": "image",
+  "path": "/images/seedream-5.5",
+  "poll_path": "/images/{id}",
+  "title": "Seedream 5.5",
+  "category": "Bytedance",
+  "summary": "Generate image with Seedream 5.5",
+  "description": "ByteDance Seedream 5.5 — more natural light, materials and skin, sharper small and dense text, and edits that leave everything you did not ask to change as it was. Text-to-image, instruction editing and multi-reference composition from up to 10 reference images, 1K or 2K output, and transparent backgrounds from a text prompt or a reference. Billing: 26 credits per image at 1K, 46 at 2K, plus 10 per reference image (each one, per generated image). No grouped/sequential generation.",
+  "pricing_text": "Pricing: 46 credits per generation (varies by resolution).",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "2:3",
+          "3:2",
+          "21:9",
+          "9:21",
+          "match_input_image"
+        ],
+        "type": "string"
+      },
+      "background": {
+        "default": "opaque",
+        "description": "Output background. \"transparent\" returns a cut-out PNG with an alpha channel, from a text prompt alone or from reference images (a transparent request is always a PNG).",
+        "enum": [
+          "opaque",
+          "transparent"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "output_format": {
+        "default": "png",
+        "description": "Output image format. A transparent background is always a PNG.",
+        "enum": [
+          "png",
+          "jpeg"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 10) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Each reference image bills 10 credits per generated image. With aspect_ratio \"match_input_image\" an edit keeps its input's shape.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output resolution. 1K bills 26 credits per image; 2K bills 46.",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}
