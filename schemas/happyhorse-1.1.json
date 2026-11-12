@@ -35,7 +35,7 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the video.",
+        "description": "Text description of the video. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "reference_images": {

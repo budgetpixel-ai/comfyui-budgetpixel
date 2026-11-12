@@ -1,0 +1,68 @@
+{
+  "id": "minimax-h3-image",
+  "kind": "image",
+  "path": "/images/minimax-h3-image",
+  "poll_path": "/images/{id}",
+  "title": "MiniMax H3 Image",
+  "category": "MiniMax",
+  "summary": "Generate image with MiniMax H3 Image",
+  "description": "MiniMax H3 Image — MiniMax's newest image model: photoreal detail, exact text on signs, menus and posters, and edits from plain instructions. Text-to-image, plus editing and multi-reference composition from up to 10 reference images, at 2K or 4K in any shape from 1:3 to 3:1. Billing: 34 credits per image at 2K, 100 at 4K, plus 12 per reference image (each one, per generated image). No seed, negative prompt or transparent background.",
+  "pricing_text": "Pricing: 34 credits per generation (varies by resolution).",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "auto",
+        "description": "Output aspect ratio. \"auto\" (default) keeps the first reference image's shape when editing, or lets the model pick a shape from the prompt for text-to-image.",
+        "enum": [
+          "auto",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "5:4",
+          "4:5",
+          "2:1",
+          "1:2",
+          "21:9",
+          "9:21"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate, all made in one request. Each image returned is billed; one the model's safety check withholds is not.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate, or of the edit to apply to the reference images. The model expands the prompt before it renders. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 10) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Each reference image bills 12 credits per generated image; images over 2 megapixels are scaled down to 2 megapixels first.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output size: 2K is about 4 MP (2048x2048, or 2720x1536 at 16:9) and bills 34 credits per image; 4K is about 16 MP (4096x4096) and bills 100.",
+        "enum": [
+          "2K",
+          "4K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

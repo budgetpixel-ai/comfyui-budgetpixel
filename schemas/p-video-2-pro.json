@@ -1,0 +1,76 @@
+{
+  "id": "p-video-2-pro",
+  "kind": "video",
+  "path": "/videos/p-video-2-pro",
+  "poll_path": "/videos/{id}",
+  "title": "P-Video 2 Pro",
+  "category": "Pruna AI",
+  "summary": "Generate video with P-Video 2 Pro",
+  "description": "Pruna AI P-Video 2 Pro — text-to-video, and image-to-video from a first frame, a last frame, or both. 480p or 768p, any length from 5 to 15 seconds, 24 fps, with generated audio. Three generation modes set the price with the resolution: `cost` (cheapest, and the fastest), `speed` (the default) and `quality` (the most detailed and the slowest). Billed per second of output; see `mode_pricing` in GET /v1/models or POST /v1/cost.",
+  "pricing_text": "Pricing: 52 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio for text-to-video. With a frame image the image sets the shape and this is ignored.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "1:1"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional last frame. With `image` the video moves between the two frames; on its own the video ends on it. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "image": {
+        "description": "Optional first frame for image-to-video; the video starts from it and follows its framing. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds, any whole number from 5 to 15.",
+        "maximum": 15,
+        "minimum": 5,
+        "type": "integer"
+      },
+      "mode": {
+        "default": "speed",
+        "description": "Generation mode, which sets the price together with `resolution`: `cost` is the cheapest and also the fastest (about 20 s for 5 s of video), `speed` is the default (about 70 s), `quality` is the most detailed and the slowest (about 85 s). Credits per second: see `mode_pricing` in GET /v1/models.",
+        "enum": [
+          "cost",
+          "speed",
+          "quality"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Text description of the video, including any sound you want to hear.",
+        "type": "string"
+      },
+      "resolution": {
+        "default": "768p",
+        "description": "Output resolution: 480p (832x480 at 16:9) or 768p (1344x768 at 16:9). Sets the price together with `mode`.",
+        "enum": [
+          "480p",
+          "768p"
+        ],
+        "type": "string"
+      },
+      "seed": {
+        "description": "Seed for reproducible generation. Omit for random.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

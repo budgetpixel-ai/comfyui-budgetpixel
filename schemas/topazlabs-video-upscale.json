@@ -6,13 +6,13 @@
   "title": "Topaz Labs Video Upscale",
   "category": "Upscaling",
   "summary": "Upscale a video with Topaz Labs Video Upscale",
-  "description": "Topaz Labs professional-grade AI video upscaling to 1080p or 4K at 30 or 60 fps. Priced per second of the INPUT video by target tier: 1080p30 = 15, 1080p60 = 30, 4K30 = 60, 4K60 = 120 credits/second (input up to 20 seconds, ≤100MB).",
-  "pricing_text": "Pricing: 25 credits per generation.",
+  "description": "Topaz Labs professional-grade AI video upscaling to 1080p or 4K at 30 or 60 fps. Priced per second of the INPUT video by target tier: 1080p30 = 25, 1080p60 = 49, 4K30 = 97, 4K60 = 195 credits/second (input up to 20 seconds, ≤100MB). Output is H.265 (HEVC) 10-bit MP4 at every target tier. A browser without a hardware HEVC decoder shows H.265 as a black frame with audio — the job status reports the codec in `video_codec`.",
+  "pricing_text": "Pricing: 25 credits per second.",
   "input": {
     "properties": {
       "target_fps": {
         "default": 30,
-        "description": "Target frame rate. 60 fps doubles the per-second rate.",
+        "description": "Target frame rate. 60 fps about doubles the per-second rate.",
         "enum": [
           30,
           60

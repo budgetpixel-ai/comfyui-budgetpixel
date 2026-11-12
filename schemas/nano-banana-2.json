@@ -7,7 +7,7 @@
   "category": "Google",
   "summary": "Generate image with Nano Banana 2",
   "description": "Google Nano Banana 2 (Gemini 3.1 Flash Image) — high-efficiency text-to-image and image editing with multi-reference composition from up to 9 reference images and 0.5K-4K output. Billing: 65 credits per image at 1K (default); 50 at 0.5K, 100 at 2K, 150 at 4K.",
-  "pricing_text": "Pricing: 65 credits per generation.",
+  "pricing_text": "Pricing: 65 credits per generation (varies by resolution).",
   "input": {
     "properties": {
       "aspect_ratio": {
@@ -39,7 +39,7 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the image to generate.",
+        "description": "Text description of the image to generate. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "reference_images": {

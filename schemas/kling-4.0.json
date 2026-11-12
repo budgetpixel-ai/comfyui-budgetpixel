@@ -1,0 +1,82 @@
+{
+  "id": "kling-4.0",
+  "kind": "video",
+  "path": "/videos/kling-4.0",
+  "poll_path": "/videos/{id}",
+  "title": "Kling 4.0",
+  "category": "Kling",
+  "summary": "Generate video with Kling 4.0",
+  "description": "Kuaishou Kling 4.0, with generated sound (dialogue, music and sound effects described in the prompt). One model for text-to-video; keyframes (a first frame and an optional last frame); reference images of characters, products, places or styles; reference videos to take motion, camera work or style from; and editing a video (supply a `video` and describe the change: the output keeps its length and shape). Frames and reference images combine. Name inputs in the prompt by position: @image_1, @image_2, ... (first frame, last frame, then reference images) and @video_1, ... (the video to edit, then reference videos). 720p or 1080p at 24 fps, 3-30 seconds. Billed per second of output: 207 credits at 720p, 310 at 1080p (`resolution_pricing` in GET /v1/models). With any input video the rate is 124 at 720p and 186 at 1080p, for the output plus the longer of the input videos and the output: editing a 5-second clip bills 10 seconds. POST /v1/cost quotes any request exactly.",
+  "pricing_text": "Pricing: 207 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio for text-to-video and reference-only jobs. A first frame or a video to edit sets the shape and this is ignored.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "21:9"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional last frame, used together with `image`: the video moves from the first frame to this one. Same input forms and limits as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "image": {
+        "description": "Optional first frame (@image_1): the video starts from it and takes its shape. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. JPG or PNG, at least 300px on each side, aspect ratio between 2:5 and 5:2. Can't be combined with `video`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds, any whole number from 3 to 30. Ignored when editing a `video` (the output keeps its length).",
+        "maximum": 30,
+        "minimum": 3,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video, including the sound you want, or the change to make when editing a `video`. Name inputs by position: @image_1, @image_2, ... (first frame, last frame, then reference images) and @video_1, @video_2, ... (the video to edit, then reference videos). Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images of characters, products, places or styles, named in the prompt as @image_N (numbered after `image` and `end_image`). Up to 10 images in all, counting `image` and `end_image`. Same input forms and limits as `image`. No extra charge.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "reference_videos": {
+        "description": "Optional reference videos to take motion, camera work or style from, named in the prompt as @video_N (numbered after `video`). MP4 or MOV, 3-30 seconds each, 700-4553 pixels on each side, aspect ratio between 2:5 and 5:2, up to 100MB each; up to 5 videos and 30 seconds in all, counting `video`. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads. Any input video moves the job to the video-input rate, billed for the output plus the longer of the input videos and the output: see POST /v1/cost.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 5,
+        "type": "array",
+        "x-bpx-media": "video"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution, 720p or 1080p. Sets the price per second: see `resolution_pricing` in GET /v1/models.",
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string"
+      },
+      "video": {
+        "description": "Optional video to EDIT (@video_1): describe the change in `prompt`. The output keeps the clip's length and aspect ratio, so `length_seconds` and `aspect_ratio` are ignored. Same limits as `reference_videos`; can't be combined with `image` or `end_image`. Billed at the video-input rate for twice the clip's length in whole seconds (plus any reference videos).",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

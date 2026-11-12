@@ -47,7 +47,7 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the video. In reference mode, address assets by order: \"Image 1\", \"Video 1\", \"Audio 1\". When extending, describe what happens next, not the source.",
+        "description": "Text description of the video. In reference mode, address assets by order: \"Image 1\", \"Video 1\", \"Audio 1\". When extending, describe what happens next, not the source. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "reference_audios": {

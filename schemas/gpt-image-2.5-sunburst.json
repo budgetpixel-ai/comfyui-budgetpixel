@@ -7,7 +7,7 @@
   "category": "OpenAI",
   "summary": "Generate image with GPT Image 2.5 Sunburst",
   "description": "OpenAI GPT Image 2.5 Sunburst — the most capable GPT Image model, built for premium visual work and precise, instruction-scoped edits that keep subject, composition and background intact. Text-to-image and image editing with up to 9 reference images, 1K/2K/4K output and five quality tiers. Billing: per output image, quality × resolution — at 1K: low 30, medium 40, high 80, xhigh 130, max 250 credits; 2K doubles and 4K triples those. Reference images: the first is free, each additional one adds 5 credits. Default quality medium (40 credits at 1K).",
-  "pricing_text": "Pricing: 40 credits per generation.",
+  "pricing_text": "Pricing: 40 credits per generation (varies by resolution).",
   "input": {
     "properties": {
       "aspect_ratio": {
@@ -47,7 +47,7 @@
         "type": "string"
       },
       "prompt": {
-        "description": "Text description of the image to generate.",
+        "description": "Text description of the image to generate. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "quality": {

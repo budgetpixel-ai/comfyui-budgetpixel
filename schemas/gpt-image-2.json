@@ -7,7 +7,7 @@
   "category": "OpenAI",
   "summary": "Generate image with GPT-Image-2",
   "description": "OpenAI GPT-Image-2 — next-generation image model with significantly improved text rendering. Text-to-image and image editing with up to 9 reference images, 1K/2K/4K output, and three quality levels. Billing: per image, resolution × quality — medium quality bills 60/120/180 credits at 1K/2K/4K, low bills half that (30/60/90), high bills 250/500/750.",
-  "pricing_text": "Pricing: 60 credits per generation.",
+  "pricing_text": "Pricing: 60 credits per generation (varies by resolution).",
   "input": {
     "properties": {
       "aspect_ratio": {
@@ -47,7 +47,7 @@
         "type": "string"
       },
       "prompt": {
-        "description": "Text description of the image to generate.",
+        "description": "Text description of the image to generate. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "quality": {
