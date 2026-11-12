@@ -7,7 +7,7 @@
   "category": "Upscaling",
   "summary": "Upscale an image with Clarity Upscaler",
   "description": "Clarity Upscaler — creative AI upscaling that can add detail as it enlarges, steered by creativity/resemblance controls and an optional guiding prompt. 30 credits per image (typically ~60 seconds).",
-  "pricing_text": "Pricing: 25 credits per generation.",
+  "pricing_text": "Pricing: 30 credits per generation.",
   "input": {
     "properties": {
       "creativity": {

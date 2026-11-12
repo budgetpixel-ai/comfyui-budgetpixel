@@ -1,0 +1,71 @@
+{
+  "id": "flux-3-image-klein",
+  "kind": "image",
+  "path": "/images/flux-3-image-klein",
+  "poll_path": "/images/{id}",
+  "title": "FLUX 3 Klein",
+  "category": "Black Forest Labs",
+  "summary": "Generate image with FLUX 3 Klein",
+  "description": "Black Forest Labs FLUX 3 Klein — the fast, low-cost FLUX 3: text-to-image and image editing in one model, with up to 10 reference images (free) and five sizes from 768px to 4K. Billing: per image by size — 768px = 11, 1K = 12, 1.5K = 15, 2K = 19, 4K = 48 credits. Use POST /v1/cost for an exact quote.",
+  "pricing_text": "Pricing: 12 credits per generation (varies by resolution).",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "auto",
+        "description": "Output aspect ratio. \"auto\" (default) follows the first reference image when editing, or lets the model pick a ratio from the prompt for text-to-image.",
+        "enum": [
+          "auto",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "5:4",
+          "4:5",
+          "2:1",
+          "1:2",
+          "21:9",
+          "9:21"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate. Each image is billed at its size's price.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate, or of the edit to apply to the reference images. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 10) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Reference images cost nothing extra.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "1K",
+        "description": "Output size by approximate pixel count: 768px ≈ 0.6 MP, 1K ≈ 1 MP, 1.5K ≈ 2 MP, 2K ≈ 4 MP, 4K ≈ 16 MP. Sets the price: 11 / 12 / 15 / 19 / 48 credits per image. 4K is returned as a JPEG, smaller sizes as PNG.",
+        "enum": [
+          "768px",
+          "1K",
+          "1.5K",
+          "2K",
+          "4K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

@@ -6,7 +6,7 @@
   "title": "Wan 3.0",
   "category": "Alibaba",
   "summary": "Generate video with Wan 3.0",
-  "description": "Alibaba Wan 3.0 — all-in-one video generation up to 30 seconds at 30fps. Text-to-video; image-to-video (first + optional last frame); and reference-to-video mixing up to 10 reference images, up to 5 reference video clips (15s combined) for editing/replication/extension, and up to 5 reference audio clips (15s combined). In reference mode the prompt can address assets by order (\"Image 1\", \"Video 1\"). Reference media can't be combined with start/end frames. 480p/720p/1080p, priced per OUTPUT second by resolution (input media is free — see `resolution_pricing` in GET /v1/models); any duration 2-30 seconds (input video + output ≤ 30s); optional audio.",
+  "description": "Alibaba Wan 3.0 — all-in-one video generation up to 30 seconds at 30fps. Text-to-video; image-to-video (first + optional last frame); and reference-to-video mixing up to 10 reference images, up to 5 reference video clips (15s combined) for editing/replication/extension, and up to 5 reference audio clips (15s combined). In reference mode the prompt can address assets by order (\"Image 1\", \"Video 1\"). Reference media can't be combined with start/end frames. 480p/720p/1080p, priced per second by resolution — output seconds plus reference-video input seconds at the same rate (reference images and audio are free; see `resolution_pricing` in GET /v1/models); any duration 2-30 seconds (input video + output ≤ 30s); optional audio.",
   "pricing_text": "Pricing: 120 credits per second.",
   "input": {
     "properties": {
@@ -46,7 +46,7 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the video, or the edit instruction when reference videos are supplied. In reference mode, address assets by order: \"Image 1\", \"Video 1\", \"Audio 1\".",
+        "description": "Text description of the video, or the edit instruction when reference videos are supplied. In reference mode, address assets by order: \"Image 1\", \"Video 1\", \"Audio 1\". Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "reference_audios": {
@@ -68,7 +68,7 @@
         "x-bpx-media": "image"
       },
       "reference_videos": {
-        "description": "Optional reference video clips (up to 5; each 2-15s, 15s combined; MP4/MOV, ≤50MB each) for editing, effect/camera replication, and extension. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Free — only OUTPUT seconds are billed — but input video duration + `length_seconds` must not exceed 30. Can't be combined with `image`/`end_image`.",
+        "description": "Optional reference video clips (up to 5; each 2-15s, 15s combined; MP4/MOV, ≤50MB each) for editing, effect/camera replication, and extension. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed per second of input at the output resolution's rate, like output seconds; input video duration + `length_seconds` must not exceed 30. Can't be combined with `image`/`end_image`.",
         "items": {
           "type": "string"
         },

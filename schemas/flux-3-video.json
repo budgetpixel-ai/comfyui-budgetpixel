@@ -1,0 +1,75 @@
+{
+  "id": "flux-3-video",
+  "kind": "video",
+  "path": "/videos/flux-3-video",
+  "poll_path": "/videos/{id}",
+  "title": "FLUX 3 Video",
+  "category": "Black Forest Labs",
+  "summary": "Generate video with FLUX 3 Video",
+  "description": "Black Forest Labs FLUX 3 Video, with generated audio (sound effects, ambience, and dialogue with lip sync). Text-to-video; image-to-video from a first frame, or a first and a last frame; and video extension (supply a `video` to continue it from its last frames: the result is your clip followed by the new footage). 720p, 1080p, 1440p or 4K at 24 fps; 5-20 seconds (an extension adds 5-15). Billed per second of output by resolution, an extension at its own rate (the source clip is not billed): see `mode_pricing` in GET /v1/models or POST /v1/cost.",
+  "pricing_text": "Pricing: 200 credits per second.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "16:9",
+        "description": "Aspect ratio for text-to-video. With `image` or `video` the picture sets the shape and this is ignored.",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "2:1",
+          "9:21"
+        ],
+        "type": "string"
+      },
+      "end_image": {
+        "description": "Optional last frame, used together with `image`: the video moves from the first frame to this one. Same input forms as `image`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "generate_audio": {
+        "default": true,
+        "description": "Generate sound with the video (default true; no price impact). false makes a silent clip.",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Optional first frame for image-to-video; the video starts from it and follows its shape. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `video`.",
+        "type": "string",
+        "x-bpx-media": "image"
+      },
+      "length_seconds": {
+        "default": 5,
+        "description": "Video length in seconds, any whole number from 5 to 20. When extending, the seconds of NEW footage, 5 to 15.",
+        "maximum": 20,
+        "minimum": 5,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the video, including the sound you want (a line in quotes is spoken). When extending, describe what happens next, not the source.",
+        "type": "string"
+      },
+      "resolution": {
+        "default": "720p",
+        "description": "Output resolution: 720p (1280x704 at 16:9), 1080p (1920x1088), 1440p (2560x1440) or 4k (3840x2176). Sets the price per second, see `mode_pricing` in GET /v1/models.",
+        "enum": [
+          "720p",
+          "1080p",
+          "1440p",
+          "4k"
+        ],
+        "type": "string"
+      },
+      "video": {
+        "description": "Optional video to EXTEND (MP4 or MOV, 1 second to 2 minutes, up to 100MB). The model continues it from its last frames for `length_seconds` of new footage guided by `prompt`, and the result is the source followed by the continuation, at the chosen `resolution`. Provide a public video URL or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image`. Only the new seconds are billed, at the extend rate.",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

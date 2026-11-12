@@ -1,0 +1,72 @@
+{
+  "id": "seedream-5.0-flash",
+  "kind": "image",
+  "path": "/images/seedream-5.0-flash",
+  "poll_path": "/images/{id}",
+  "title": "SeeDream 5.0 Flash",
+  "category": "Bytedance",
+  "summary": "Generate image with SeeDream 5.0 Flash",
+  "description": "ByteDance SeeDream 5.0 Flash — fast, low-cost text-to-image and image editing with multi-reference composition from up to 10 reference images and 1K/2K output, typically in under 20 seconds. Can keep a transparent background when editing a PNG cutout. Billing: a flat 25 credits per image at 1K or 2K; input images are free. No grouped/sequential generation.",
+  "pricing_text": "Pricing: 25 credits per generation.",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "2:3",
+          "3:2",
+          "21:9",
+          "9:21"
+        ],
+        "type": "string"
+      },
+      "background": {
+        "default": "opaque",
+        "description": "Output background. \"transparent\" keeps a transparent background when editing: it needs exactly one input image, a PNG that already has transparent pixels (a cutout, sticker or logo), and returns a PNG with an alpha channel. Text-to-image and multi-reference requests must use \"opaque\".",
+        "enum": [
+          "opaque",
+          "transparent"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 10) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Input images are free.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output resolution. Both tiers bill the same 25 credits per image.",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

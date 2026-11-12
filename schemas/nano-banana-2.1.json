@@ -1,0 +1,88 @@
+{
+  "id": "nano-banana-2.1",
+  "kind": "image",
+  "path": "/images/nano-banana-2.1",
+  "poll_path": "/images/{id}",
+  "title": "Nano Banana 2.1",
+  "category": "Google",
+  "summary": "Generate image with Nano Banana 2.1",
+  "description": "Google Nano Banana 2.1 — fast text-to-image and image editing with sharper output and cleaner in-image text than Nano Banana 2. Edit or compose from up to 9 reference images (free), render at 1K, 2K or 4K, and optionally ground the image in live web results or web images. Billing: per image by size — 1K = 45, 2K = 70, 4K = 150 credits. Search grounding is off by default and adds per image: google_search +10, image_search +20 (it includes a web search). Use POST /v1/cost for an exact quote.",
+  "pricing_text": "Pricing: 45 credits per generation (varies by resolution).",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "auto",
+        "description": "Output aspect ratio. \"auto\" (default) follows the first reference image when editing and gives a square image for text-to-image.",
+        "enum": [
+          "auto",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "5:4",
+          "4:5",
+          "21:9",
+          "1:4",
+          "4:1",
+          "1:8",
+          "8:1"
+        ],
+        "type": "string"
+      },
+      "google_search": {
+        "default": false,
+        "description": "Ground the image in live Google Search results (weather, scores, recent events, current facts). Off by default. Adds 10 credits per image.",
+        "type": "boolean"
+      },
+      "image_search": {
+        "default": false,
+        "description": "Let the model look up web images as visual context before rendering. Off by default. Runs a web search too, so it adds 20 credits per image in total, with or without google_search.",
+        "type": "boolean"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate. Each image is billed at its size's price, plus search grounding if enabled.",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "output_format": {
+        "description": "File format of the result: png or jpeg, always at full resolution (16:9 at 4K is 5504x3072 either way; the PNG is about 20 MB, the JPEG a few MB). Omit it to get the file as the model produced it, which is a PNG or a near-lossless JPEG.",
+        "enum": [
+          "png",
+          "jpeg"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate, or of the edit to apply to the reference images. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 9) for image editing and multi-reference composition. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Reference images cost nothing extra.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 9,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "1K",
+        "description": "Output resolution tier. Sets the price: 1K = 45, 2K = 70, 4K = 150 credits per image.",
+        "enum": [
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}

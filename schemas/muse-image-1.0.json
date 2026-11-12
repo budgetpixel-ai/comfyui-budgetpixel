@@ -45,7 +45,7 @@
         "type": "string"
       },
       "prompt": {
-        "description": "Text description of the image to generate.",
+        "description": "Text description of the image to generate. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "quality": {

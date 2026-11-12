@@ -7,7 +7,7 @@
   "category": "Black Forest Labs",
   "summary": "Generate image with FLUX 2 Pro",
   "description": "Black Forest Labs FLUX 2 Pro — premium quality with megapixel-based resolution and seed control.",
-  "pricing_text": "Pricing: 25 credits per generation.",
+  "pricing_text": "Pricing: 25 credits per generation (varies by resolution).",
   "input": {
     "properties": {
       "aspect_ratio": {

@@ -7,7 +7,7 @@
   "category": "xAI",
   "summary": "Generate image with Grok Imagine 2.0",
   "description": "xAI Grok Imagine 2.0 — the latest Grok image model: precise editing, infographics, ads, game assets, UI/UX mockups and storyboards. Text-to-image, plus editing from a single input image (the input image is free). Billing: per image, quality × resolution — low 1K = 50, low 2K = 80, medium 1K = 80, medium 2K = 100 credits. Use POST /v1/cost for an exact quote.",
-  "pricing_text": "Pricing: 50 credits per generation.",
+  "pricing_text": "Pricing: 50 credits per generation (varies by resolution).",
   "input": {
     "properties": {
       "aspect_ratio": {

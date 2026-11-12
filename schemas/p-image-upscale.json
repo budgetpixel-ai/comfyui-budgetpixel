@@ -7,7 +7,7 @@
   "category": "Upscaling",
   "summary": "Upscale an image with P-Image Upscale",
   "description": "Pruna AI P-Image Upscale — fast image upscaling with results in seconds, up to 32 MP output. Priced by the target resolution tier: 4 MP = 10, 8 MP = 15, 16 MP = 30, 32 MP = 60 credits per image.",
-  "pricing_text": "Pricing: 25 credits per generation.",
+  "pricing_text": "Pricing: 10 credits per generation (varies by resolution).",
   "input": {
     "properties": {
       "enhance_details": {

@@ -24,7 +24,7 @@
         "type": "string"
       },
       "audio": {
-        "description": "Optional reference audio (MP3/WAV/OGG) for the generated video. Provide a public audio URL or an uploaded-file URL from POST /v1/uploads (passed by URL, not inlined). Must accompany an image (`image` or `reference_images`) or a `video` input — audio can't be the only input.",
+        "description": "Optional reference audio (MP3/WAV/OGG) for the generated video. Provide a public audio URL or an uploaded-file URL from POST /v1/uploads (passed by URL, not inlined). Must accompany `reference_images`, `reference_videos` or a `video` input — audio can't be the only input, and it can't be combined with `image`/`end_image` (start/end frames): to pair a picture with audio, pass the picture in `reference_images`. Counts toward the 3 audio clips; pass more in `reference_audios`.",
         "type": "string",
         "x-bpx-media": "audio"
       },
@@ -50,17 +50,35 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the video.",
+        "description": "Text description of the video. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
+      "reference_audios": {
+        "description": "Optional reference audio clips (up to 3 in all, `audio` included; each 2-15s, 15s combined; WAV/MP3) that guide sound and voice. Must accompany a reference image or video — audio can't be the only input. Each item is a public audio URL or an uploaded-file URL from POST /v1/uploads. Free. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "audio"
+      },
       "reference_images": {
-        "description": "Optional reference images that guide the generated video. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image` (start/end frames). Up to 9 on their own (reference-images-to-video); may also accompany a `video` to guide a video-edit, in which case up to 6 are used.",
+        "description": "Optional reference images that guide the generated video. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image` (start/end frames). Up to 9, with or without a `video` to edit.",
         "items": {
           "type": "string"
         },
         "maxItems": 9,
         "type": "array",
         "x-bpx-media": "image"
+      },
+      "reference_videos": {
+        "description": "Optional reference video clips (up to 3 in all — a `video` to edit counts as one; each 2-15s, 15s combined; MP4/MOV, ≤50MB each) for motion, camera and identity guidance, addressed in the prompt by order as \"Video 1\", \"Video 2\" (a `video` to edit is \"Video 1\"). Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed on the INPUT duration at half the output per-second rate in addition to the output — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "video"
       },
       "resolution": {
         "default": "720p",
@@ -72,7 +90,7 @@
         "type": "string"
       },
       "video": {
-        "description": "Optional input video for video-to-video editing (2-15s, ≤100MB). Provide a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). When set, the request runs in video-edit mode; you may also pass `reference_images` (up to 6) and/or an `audio` track to guide the edit. Not combinable with `image`/`end_image`. Billed on the INPUT duration at half the output per-second rate in addition to the output — estimate via POST /v1/cost.",
+        "description": "Optional input video for video-to-video editing (2-15s, ≤100MB). Provide a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). When set, the request runs in video-edit mode and the video is \"Video 1\"; you may also pass `reference_images` (up to 9), up to 2 more `reference_videos` (15s in all with this one) and up to 3 audio clips (`audio` plus `reference_audios`) to guide the edit. Not combinable with `image`/`end_image`. Billed on the INPUT duration at half the output per-second rate in addition to the output — estimate via POST /v1/cost.",
         "type": "string",
         "x-bpx-media": "video"
       }

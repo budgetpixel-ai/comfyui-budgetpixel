@@ -1,0 +1,47 @@
+{
+  "id": "flux-3-video-upscale",
+  "kind": "video-upscale",
+  "path": "/video-upscales/flux-3-video-upscale",
+  "poll_path": "/video-upscales/{id}",
+  "title": "FLUX 3 Video Upscale",
+  "category": "Upscaling",
+  "summary": "Upscale a video with FLUX 3 Video Upscale",
+  "description": "Black Forest Labs' FLUX 3 super-resolution for video: 1.5x to 3x the input frame (the aspect ratio is kept; an output frame is capped at about 14 MP), at the input's frame rate, with its audio kept. Output is H.264 MP4. precise mode keeps the source as it is (faces, products); creative mode adds fine detail. Priced per megapixel-second of OUTPUT (1 MP = 1,048,576 pixels): 95 credits precise, 135 creative, so one second of 1080p output is 188 / 267 credits and of 4K 752 / 1068. Input up to 20 seconds and 2560x1440, ≤100MB.",
+  "pricing_text": "Pricing: 188 credits per second.",
+  "input": {
+    "properties": {
+      "mode": {
+        "default": "precise",
+        "description": "precise keeps the source as it is; creative adds fine detail (faces and products can change) and costs more.",
+        "enum": [
+          "precise",
+          "creative"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Optional: what the clip shows, to steer the detail creative mode adds (up to 1000 characters).",
+        "type": "string"
+      },
+      "upscale_factor": {
+        "default": 2,
+        "description": "How many times larger the output frame is. 720p at 3 is 4K (3840x2160).",
+        "enum": [
+          1.5,
+          2,
+          2.5,
+          3
+        ],
+        "type": "number"
+      },
+      "video": {
+        "description": "The video to upscale (up to 20 seconds and 2560x1440, MP4/MOV/WebM, ≤100MB). A public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined).",
+        "type": "string",
+        "x-bpx-media": "video"
+      }
+    },
+    "required": [
+      "video"
+    ]
+  }
+}

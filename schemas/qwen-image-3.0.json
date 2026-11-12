@@ -7,7 +7,7 @@
   "category": "Alibaba",
   "summary": "Generate image with Qwen Image 3.0",
   "description": "Alibaba Qwen Image 3.0 — unified generation and editing balancing quality and speed, with multi-image fusion from up to 3 reference images. Billing: 40 credits per image at 1K, 45 at 2K.",
-  "pricing_text": "Pricing: 40 credits per generation.",
+  "pricing_text": "Pricing: 40 credits per generation (varies by resolution).",
   "input": {
     "properties": {
       "aspect_ratio": {
@@ -38,7 +38,7 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the image to generate.",
+        "description": "Text description of the image to generate. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "reference_images": {

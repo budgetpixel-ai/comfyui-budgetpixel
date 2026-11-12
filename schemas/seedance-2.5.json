@@ -6,7 +6,7 @@
   "title": "SeeDance 2.5",
   "category": "ByteDance (SeeDance)",
   "summary": "Generate video with SeeDance 2.5",
-  "description": "ByteDance SeeDance 2.5 — flagship multimodal video. Text-to-video; image-to-video (start + optional end frame); and reference-to-video mixing up to 15 reference images (free), up to 5 reference video clips (2-15s each, 30s combined — billed per second of INPUT at half the output rate, see POST /v1/cost), and up to 5 reference audio clips (30s combined, free; audio-only input is supported). Video editing and extension are reference-video modes — no separate edit endpoint. Reference media can't be combined with start/end frames. 480p/720p/1080p, any duration 4-30 seconds, optional audio.",
+  "description": "ByteDance SeeDance 2.5 — flagship multimodal video. Text-to-video; image-to-video (start + optional end frame); and reference-to-video mixing up to 30 reference images (free), up to 10 reference video clips (2-30s each, 30s combined — billed per second of INPUT at half the output rate, see POST /v1/cost), and up to 10 reference audio clips (2-30s each, 30s combined, free; audio-only input is supported). Video editing and extension are reference-video modes — no separate edit endpoint. Reference media can't be combined with start/end frames. 480p/720p/1080p, any duration 4-30 seconds, optional audio. Draft mode: `draft` makes a 480p draft at the 480p price, and within 7 days `from_draft_job_id` renders that same video at 1080p (the final), priced at 1080p for the draft's length. 1080p output is H.265 (HEVC) 10-bit; 480p and 720p are H.264. A browser without a hardware HEVC decoder shows H.265 as a black frame with audio — the job status reports the codec in `video_codec`.",
   "pricing_text": "Pricing: 330 credits per second.",
   "input": {
     "properties": {
@@ -23,10 +23,18 @@
         ],
         "type": "string"
       },
+      "draft": {
+        "description": "Make a 480p draft, priced like any 480p video (150 credits/sec, plus 80/sec of reference-video input). Within 7 days, send its job `id` as `from_draft_job_id` to render the same video at 1080p: the same motion, framing and sound, sharper. Leave `resolution` out.",
+        "type": "boolean"
+      },
       "end_image": {
         "description": "Optional end frame, used together with `image` (the start frame) to interpolate the video between the two frames. Same input forms as `image`.",
         "type": "string",
         "x-bpx-media": "image"
+      },
+      "from_draft_job_id": {
+        "description": "Render the 1080p final of one of your succeeded drafts, within 7 days of it: the draft job's `id` (a draft made with `draft`, over MCP or in the Video Workshop). Send it with no other parameters (the draft's own `prompt` may come along): the final reuses the draft's prompt, inputs, length, aspect ratio, seed and audio setting. Priced as a 1080p video of the draft's length (750 credits/sec) plus the draft's reference-video input at 375/sec; POST /v1/cost quotes it. GET /v1/videos/{id} on the draft says whether it can still be finalized (`draft_finalizable`), until when (`draft_expires_at`) and the final's standard price (`draft_final_credits`).",
+        "type": "string"
       },
       "generate_audio": {
         "description": "Generate audio with the video (no price impact).",
@@ -45,39 +53,39 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the video.",
+        "description": "Text description of the video. Required, except with `from_draft_job_id` (a final reuses its draft's prompt). Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "reference_audios": {
-        "description": "Optional reference audio clips (up to 5; each 2-15s, 30s combined; WAV/MP3) that guide sound/voice. Audio-only input is supported. Each item is a public audio URL or an uploaded-file URL from POST /v1/uploads. Free — no input billing. Can't be combined with `image`/`end_image`.",
+        "description": "Optional reference audio clips (up to 10; each 2-30s, 30s combined; WAV/MP3) that guide sound/voice. Audio-only input is supported. Each item is a public audio URL or an uploaded-file URL from POST /v1/uploads. Free — no input billing. Can't be combined with `image`/`end_image`.",
         "items": {
           "type": "string"
         },
-        "maxItems": 5,
+        "maxItems": 10,
         "type": "array",
         "x-bpx-media": "audio"
       },
       "reference_images": {
-        "description": "Optional reference images (up to 15, free) that guide identity/style in reference-to-video mode. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image`.",
+        "description": "Optional reference images (up to 30, free) that guide identity/style in reference-to-video mode. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Can't be combined with `image`/`end_image`.",
         "items": {
           "type": "string"
         },
-        "maxItems": 15,
+        "maxItems": 30,
         "type": "array",
         "x-bpx-media": "image"
       },
       "reference_videos": {
-        "description": "Optional reference video clips (up to 5; each 2-15s, 30s combined; MP4/MOV, ≤50MB each) for editing, extension, and motion/identity guidance. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed on the INPUT duration at half the output per-second rate (80/sec at 480p, 160/sec at 720p, 375/sec at 1080p) in addition to the output — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
+        "description": "Optional reference video clips (up to 10; each 2-30s — a clip the prompt edits 4-30s — 30s combined; MP4/MOV, ≤50MB each) for editing, extension, and motion/identity guidance. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed on the INPUT duration at half the output per-second rate (80/sec at 480p, 160/sec at 720p, 375/sec at 1080p) in addition to the output — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
         "items": {
           "type": "string"
         },
-        "maxItems": 5,
+        "maxItems": 10,
         "type": "array",
         "x-bpx-media": "video"
       },
       "resolution": {
         "default": "720p",
-        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models. A draft (`draft`) is always 480p and its final 1080p: leave resolution out for both. 1080p output is H.265 (HEVC) 10-bit; 480p and 720p are H.264.",
         "enum": [
           "480p",
           "720p",
@@ -86,8 +94,6 @@
         "type": "string"
       }
     },
-    "required": [
-      "prompt"
-    ]
+    "required": []
   }
 }
