@@ -6,8 +6,8 @@
   "title": "Kling 3.0 Motion Control Standard",
   "category": "Motion Control",
   "summary": "Motion control with Kling 3.0 Motion Control Standard",
-  "description": "Kling 3.0 motion control (standard tier) — transfers the motion from a reference video onto a character image. Priced per second of the reference video (130 credits/second).",
-  "pricing_text": "Pricing: 130 credits per second.",
+  "description": "Kling 3.0 motion control (standard tier) — transfers the motion from a reference video onto a character image. Priced per second of the reference video (91 credits/second).",
+  "pricing_text": "Pricing: 91 credits per second.",
   "input": {
     "properties": {
       "character_orientation": {
@@ -20,7 +20,7 @@
         "type": "string"
       },
       "image": {
-        "description": "Character image to animate. A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. jpg/png/webp.",
+        "description": "Character image to animate. A public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. jpg/png/webp (a webp is converted), at least 340px on each side, aspect ratio between 1:2.5 and 2.5:1.",
         "type": "string",
         "x-bpx-media": "image"
       },
@@ -35,7 +35,7 @@
         "type": "string"
       },
       "video": {
-        "description": "Motion reference video whose movement drives the character. A public video URL or an uploaded-file URL from POST /v1/uploads. mp4/webm, 3-30 seconds (max 10 seconds when character_orientation is \"image\"), up to 30 MB.",
+        "description": "Motion reference video whose movement drives the character. A public video URL or an uploaded-file URL from POST /v1/uploads. mp4/mov, 3-30 seconds (max 10 seconds when character_orientation is \"image\"), up to 30 MB.",
         "type": "string",
         "x-bpx-media": "video"
       }

@@ -6,8 +6,8 @@
   "title": "Kling V3 Omni",
   "category": "Kling",
   "summary": "Generate video with Kling V3 Omni",
-  "description": "Kuaishou Kling V3 Omni — text-to-video; image-to-video (start + optional end frame); reference-images-to-video (up to 7 images); and video-to-video editing (supply a `video`). 720p / 1080p / 4K, priced per resolution and per audio (see `resolution_pricing` in GET /v1/models and POST /v1/cost). Video-edit carries its own per-second rate and never has audio (the model forces sound off with an input video).",
-  "pricing_text": "Pricing: 85 credits per second.",
+  "description": "Kuaishou Kling V3 Omni — text-to-video; image-to-video (start + optional end frame); reference-images-to-video (up to 7 images); and video-to-video editing (supply a `video` of 3-10 seconds: the output keeps its length, shape and sound). 720p (standard), 1080p (pro) or 4K, any duration from 3 to 15 seconds, optional generated audio. Billed per second of output: 720p 219 (292 with audio), 1080p 292 (364 with audio), 4K 546; editing a video 219 at 720p and 292 at 1080p, for the clip's length (no 4K and no generated audio when editing). See `resolution_pricing` in GET /v1/models and POST /v1/cost.",
+  "pricing_text": "Pricing: 219 credits per second.",
   "input": {
     "properties": {
       "aspect_ratio": {
@@ -30,19 +30,19 @@
         "type": "boolean"
       },
       "image": {
-        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video. Can't be combined with `reference_images`.",
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. JPG or PNG, at least 300px on each side, aspect ratio between 2:5 and 5:2. Omit for text-to-video. Can't be combined with `reference_images`.",
         "type": "string",
         "x-bpx-media": "image"
       },
       "length_seconds": {
         "default": 5,
-        "description": "Video length in seconds (3–15). For video-edit, set this to the input video's rounded duration.",
+        "description": "Video length in seconds (3–15). Ignored when editing a `video` (the output keeps its length).",
         "maximum": 15,
         "minimum": 3,
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the video. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "description": "Text description of the video, or the change to make when editing a `video` (up to 2,500 characters). Reference images may be named in the prompt as <<<image_1>>>, <<<image_2>>>, ... in the order sent, and the video to edit as <<<video_1>>>. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
         "type": "string"
       },
       "reference_images": {
@@ -56,7 +56,7 @@
       },
       "resolution": {
         "default": "720p",
-        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
+        "description": "Output resolution: 720p (standard), 1080p (pro) or 4k. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models.",
         "enum": [
           "720p",
           "1080p",
@@ -65,7 +65,7 @@
         "type": "string"
       },
       "video": {
-        "description": "Optional input video for video-to-video editing. Provide a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). When set, the request runs in video-edit mode: up to 4 `reference_images` may guide the edit, start/end frames are not supported, audio is always off, and the output length matches the input video — set `length_seconds` to the input's duration rounded to whole seconds (3–15), which is what billing uses.",
+        "description": "Optional video to EDIT (MP4 or MOV, 3-10 seconds, 720-2160 pixels on each side, up to 100MB). Provide a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). The request then runs in video-edit mode: up to 4 `reference_images` may guide the edit, start/end frames are not supported, the clip keeps its own sound and no audio is generated, and the output keeps the clip's length and shape, so `length_seconds`, `aspect_ratio` and `generate_audio` are ignored. Billed per second of output at the edit rate, for the clip's length rounded up to a whole second (measured by us). 720p or 1080p only: 4K can't edit a video.",
         "type": "string",
         "x-bpx-media": "video"
       }
