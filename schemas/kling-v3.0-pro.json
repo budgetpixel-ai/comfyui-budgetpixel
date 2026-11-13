@@ -6,8 +6,8 @@
   "title": "Kling 3.0 Pro",
   "category": "Kling",
   "summary": "Generate video with Kling 3.0 Pro",
-  "description": "Kuaishou Kling 3.0 in Professional mode (1080p) — text-to-video, plus image-to-video with a start frame and an optional end frame. Any duration from 3 to 15 seconds. Optional audio (raises the per-second rate — estimate via POST /v1/cost).",
-  "pricing_text": "Pricing: 115 credits per second.",
+  "description": "Kuaishou Kling 3.0 in Professional mode (1080p) — text-to-video, plus image-to-video with a start frame and an optional end frame. Any duration from 3 to 15 seconds. Optional generated audio. Billed per second of output: 292 credits per second without audio, 437 with generated audio (POST /v1/cost quotes any request).",
+  "pricing_text": "Pricing: 292 credits per second.",
   "input": {
     "properties": {
       "aspect_ratio": {
@@ -30,7 +30,7 @@
         "type": "boolean"
       },
       "image": {
-        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-video.",
+        "description": "Optional start frame for image-to-video. Provide a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. JPG or PNG, at least 300px on each side, aspect ratio between 2:5 and 5:2. Omit for text-to-video.",
         "type": "string",
         "x-bpx-media": "image"
       },
@@ -42,7 +42,7 @@
         "type": "integer"
       },
       "prompt": {
-        "description": "Text description of the video.",
+        "description": "Text description of the video (up to 2,500 characters).",
         "type": "string"
       }
     },
