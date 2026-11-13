@@ -1,0 +1,38 @@
+{
+  "id": "eleven-music-v2.5",
+  "kind": "audio",
+  "path": "/audios/eleven-music-v2.5",
+  "poll_path": "/audios/{id}",
+  "title": "Eleven Music v2.5",
+  "category": "Music",
+  "summary": "Generate music with Eleven Music v2.5",
+  "description": "Eleven Music v2.5 by ElevenLabs — full songs with vocals, or instrumentals, 10 seconds to 5 minutes long, from a style prompt and optional lyrics it sings as written. Priced at 200 credits per minute of the requested duration, billed per second with a 10-second minimum (10 s = 34 credits, 30 s = 100, 300 s = 1000); POST /v1/cost quotes the exact price. MP3 output (44.1 kHz, 128 kbps). Prompts that name artists, songs, albums or record labels are refused, uncharged, with a suggested rewrite.",
+  "pricing_text": "Pricing: 200 credits per minute (10s minimum).",
+  "input": {
+    "properties": {
+      "duration": {
+        "default": 60,
+        "description": "Length of the song in seconds (10-300). Billed per second of the requested length at the per-minute rate, 10-second minimum.",
+        "maximum": 300,
+        "minimum": 10,
+        "type": "integer"
+      },
+      "instrumental": {
+        "default": false,
+        "description": "Generate an instrumental track (no vocals). Cannot be combined with lyrics.",
+        "type": "boolean"
+      },
+      "lyrics": {
+        "description": "Optional lyrics to sing as written (up to 3000 characters; prompt and lyrics together at most 4090). Cannot be combined with instrumental.",
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Style and description of the song (up to 2000 characters): genre, mood, instruments, tempo, vocals — e.g. \"warm indie folk, acoustic guitar, soft female vocal, 90 BPM\". Prompts that name artists, songs, albums or record labels are refused.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}
