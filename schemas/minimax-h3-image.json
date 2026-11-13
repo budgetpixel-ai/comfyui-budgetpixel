@@ -6,7 +6,7 @@
   "title": "MiniMax H3 Image",
   "category": "MiniMax",
   "summary": "Generate image with MiniMax H3 Image",
-  "description": "MiniMax H3 Image — MiniMax's newest image model: photoreal detail, exact text on signs, menus and posters, and edits from plain instructions. Text-to-image, plus editing and multi-reference composition from up to 10 reference images, at 2K or 4K in any shape from 1:3 to 3:1. Billing: 34 credits per image at 2K, 100 at 4K, plus 12 per reference image (each one, per generated image). No seed, negative prompt or transparent background.",
+  "description": "MiniMax H3 Image — MiniMax's newest image model: photoreal detail, exact text on signs, menus and posters, and edits from plain instructions. Text-to-image, plus editing and multi-reference composition from up to 10 reference images, at 2K or 4K in 13 aspect ratios from 9:21 to 21:9. Billing: 34 credits per image at 2K, 100 at 4K, plus 12 per reference image (each one, per generated image). No seed, negative prompt or transparent background.",
   "pricing_text": "Pricing: 34 credits per generation (varies by resolution).",
   "input": {
     "properties": {
