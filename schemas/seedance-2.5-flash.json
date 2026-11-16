@@ -12,7 +12,7 @@
     "properties": {
       "aspect_ratio": {
         "default": "16:9",
-        "description": "Aspect ratio for text-to-video. Ignored (adaptive) when a start frame or any reference media sets the frame.",
+        "description": "Output aspect ratio for text-to-video and reference-to-video. Ignored with a start frame (`image`): the video keeps the frame's shape. With `reference_videos`, a ratio you send sets the output's shape; leave it out and the model picks one (adaptive). A job the model reads as an edit or an extension of a reference clip keeps that clip's shape instead.",
         "enum": [
           "16:9",
           "9:16",

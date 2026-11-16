@@ -6,13 +6,13 @@
   "title": "SeeDance 2.5",
   "category": "ByteDance (SeeDance)",
   "summary": "Generate video with SeeDance 2.5",
-  "description": "ByteDance SeeDance 2.5 — flagship multimodal video. Text-to-video; image-to-video (start + optional end frame); and reference-to-video mixing up to 30 reference images (free), up to 10 reference video clips (2-30s each, 30s combined — billed per second of INPUT at half the output rate, see POST /v1/cost), and up to 10 reference audio clips (2-30s each, 30s combined, free; audio-only input is supported). Video editing and extension are reference-video modes — no separate edit endpoint. Reference media can't be combined with start/end frames. 480p/720p/1080p, any duration 4-30 seconds, optional audio. Draft mode: `draft` makes a 480p draft at the 480p price, and within 7 days `from_draft_job_id` renders that same video at 1080p (the final), priced at 1080p for the draft's length. 1080p output is H.265 (HEVC) 10-bit; 480p and 720p are H.264. A browser without a hardware HEVC decoder shows H.265 as a black frame with audio — the job status reports the codec in `video_codec`.",
+  "description": "ByteDance SeeDance 2.5 — flagship multimodal video. Text-to-video; image-to-video (start + optional end frame); and reference-to-video mixing up to 30 reference images (free), up to 10 reference video clips (2-30s each, 30s combined — billed per second of INPUT, see POST /v1/cost), and up to 10 reference audio clips (2-30s each, 30s combined, free; audio-only input is supported). Video editing and extension are reference-video modes — no separate edit endpoint. Reference media can't be combined with start/end frames. 480p/720p/1080p/4K, any duration 4-30 seconds, optional audio. Draft mode: `draft` makes a 480p draft at the 480p price, and within 7 days `from_draft_job_id` renders that same video at 1080p (the final), priced at 1080p for the draft's length. 1080p and 4K output is H.265 (HEVC) 10-bit; 480p and 720p are H.264. A browser without a hardware HEVC decoder shows H.265 as a black frame with audio — the job status reports the codec in `video_codec`.",
   "pricing_text": "Pricing: 330 credits per second.",
   "input": {
     "properties": {
       "aspect_ratio": {
         "default": "16:9",
-        "description": "Aspect ratio for text-to-video. Ignored (adaptive) when a start frame or any reference media sets the frame.",
+        "description": "Output aspect ratio for text-to-video and reference-to-video. Ignored with a start frame (`image`): the video keeps the frame's shape. With `reference_videos`, a ratio you send sets the output's shape; leave it out and the model picks one (adaptive). A job the model reads as an edit or an extension of a reference clip keeps that clip's shape instead.",
         "enum": [
           "16:9",
           "9:16",
@@ -75,7 +75,7 @@
         "x-bpx-media": "image"
       },
       "reference_videos": {
-        "description": "Optional reference video clips (up to 10; each 2-30s — a clip the prompt edits 4-30s — 30s combined; MP4/MOV, ≤50MB each) for editing, extension, and motion/identity guidance. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed on the INPUT duration at half the output per-second rate (80/sec at 480p, 160/sec at 720p, 375/sec at 1080p) in addition to the output — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
+        "description": "Optional reference video clips (up to 10; each 2-30s — a clip the prompt edits 4-30s — 30s combined; MP4/MOV, ≤50MB each) for editing, extension, and motion/identity guidance. Each item is a public video URL or an uploaded-file URL from POST /v1/uploads (videos are passed by URL, not inlined). Billed on the INPUT duration in addition to the output, by the output resolution: 80/sec at 480p, 160/sec at 720p, 375/sec at 1080p, 750/sec at 4k — estimate via POST /v1/cost. Can't be combined with `image`/`end_image`.",
         "items": {
           "type": "string"
         },
@@ -85,11 +85,12 @@
       },
       "resolution": {
         "default": "720p",
-        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models. A draft (`draft`) is always 480p and its final 1080p: leave resolution out for both. 1080p output is H.265 (HEVC) 10-bit; 480p and 720p are H.264.",
+        "description": "Output resolution. Pricing varies by resolution — see `resolution_pricing` in GET /v1/models. 4k is 3840x2160 at 16:9 (2160x3840 at 9:16, 2880x2880 square). A draft (`draft`) is always 480p and its final 1080p: leave resolution out for both. 1080p and 4K output is H.265 (HEVC) 10-bit; 480p and 720p are H.264.",
         "enum": [
           "480p",
           "720p",
-          "1080p"
+          "1080p",
+          "4k"
         ],
         "type": "string"
       }
