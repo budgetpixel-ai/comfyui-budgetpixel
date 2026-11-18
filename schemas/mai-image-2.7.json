@@ -1,0 +1,81 @@
+{
+  "id": "mai-image-2.7",
+  "kind": "image",
+  "path": "/images/mai-image-2.7",
+  "poll_path": "/images/{id}",
+  "title": "MAI Image 2.7",
+  "category": "Microsoft",
+  "summary": "Generate image with MAI Image 2.7",
+  "description": "Microsoft MAI Image 2.7 — Microsoft's newest image model: realistic photos, correctly spelled text in images, and precise edits from plain instructions that change what you ask and keep the rest. Text-to-image, plus editing and combining up to 5 input images, at 1K (about 1 MP) or 2K (about 4 MP) in 7 aspect ratios, and transparent backgrounds. Billing: 50 credits per image at 1K, 190 at 2K, plus 11 (1K) or 45 (2K) per input image (each one, per generated image). Prompts up to 8000 characters. No seed or negative prompt.",
+  "pricing_text": "Pricing: 50 credits per generation (varies by resolution).",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "auto",
+        "description": "Output aspect ratio. \"auto\" (default): an edit keeps the first input image's frame and comes back aligned with it, and text-to-image is 1:1. On an edit, a ratio other than the input's own re-composes the picture into that shape.",
+        "enum": [
+          "auto",
+          "1:1",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "16:9",
+          "9:16"
+        ],
+        "type": "string"
+      },
+      "background": {
+        "default": "opaque",
+        "description": "Output background. \"transparent\" returns a cut-out with an alpha channel (PNG, or WebP when asked), made from a text prompt: with input images the model draws the subject anew rather than cutting out the input (it is not a background remover).",
+        "enum": [
+          "opaque",
+          "transparent"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate (each one is billed).",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "output_format": {
+        "default": "png",
+        "description": "Output image format.",
+        "enum": [
+          "png",
+          "jpeg",
+          "webp"
+        ],
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate, or of the edit to apply to the input images (up to 8000 characters). Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional input images (up to 5) to edit or combine. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Each input image bills 11 credits at 1K or 45 at 2K, per generated image; at 1K an input over 1 megapixel is scaled down to 1 megapixel first.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 5,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "1K",
+        "description": "Output size: 1K is about 1 MP (1024x1024, or 1360x768 at 16:9) and bills 50 credits per image; 2K is about 4 MP (2048x2048, or 2720x1536 at 16:9) and bills 190. Input images add 11 each at 1K and 45 each at 2K. An edit that keeps its input's frame comes back at about 1 MP (1K) or with a 2048 px long edge (2K: 2048x1152 at 16:9).",
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}
