@@ -1,0 +1,57 @@
+{
+  "id": "kling-image-4.0-long",
+  "kind": "image",
+  "path": "/images/kling-image-4.0-long",
+  "poll_path": "/images/{id}",
+  "title": "Kling Image 4.0 Long",
+  "category": "Kling",
+  "summary": "Generate image with Kling Image 4.0 Long",
+  "description": "Kling Image 4.0 Long — one tall image, 1024 px wide: a full webpage design (skill \"webpage\") or an ecommerce product detail page made from 1-3 product photos (skill \"ecommerce\", short, medium or long). The page's text follows the prompt's language. Billing per image: a webpage 675 credits; a product page 290 (short), 580 (medium) or 965 (long); plus 4 per reference image.",
+  "pricing_text": "Pricing: 675 credits per generation.",
+  "input": {
+    "properties": {
+      "length": {
+        "default": "medium",
+        "description": "Product pages only: short (about 2-5 sections, 290 credits), medium (6-10, 580, the default) or long (11-18, 965). Ignored for a webpage.",
+        "enum": [
+          "short",
+          "medium",
+          "long"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of pages to generate (each one is billed).",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "What the page is for and what it should hold (sections, offers, tone). For a product page, refer to the product photos as @image_1, @image_2, @image_3. The page's text follows the prompt's language.",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "For \"ecommerce\": 1 to 3 product photos (required). For \"webpage\": up to 2, optional: the first is the subject the page features (a product, logo or person), the second a style reference. Each bills 4 credits. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 3,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "skill": {
+        "description": "\"webpage\": a full webpage design (675 credits). \"ecommerce\": a product detail page made from 1-3 product photos (price by length).",
+        "enum": [
+          "webpage",
+          "ecommerce"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt",
+      "skill"
+    ]
+  }
+}

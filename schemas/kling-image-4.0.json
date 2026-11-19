@@ -1,0 +1,63 @@
+{
+  "id": "kling-image-4.0",
+  "kind": "image",
+  "path": "/images/kling-image-4.0",
+  "poll_path": "/images/{id}",
+  "title": "Kling Image 4.0",
+  "category": "Kling",
+  "summary": "Generate image with Kling Image 4.0",
+  "description": "Kling Image 4.0 — Kling's newest image model: realistic images with correctly spelled text, and edits that combine up to 10 reference images (refer to them in the prompt as @image_1, @image_2 …). 2K or 4K output in 8 aspect ratios or auto. Billing: 75 credits per image at 2K, 115 at 4K, plus 4 per reference image (each one, per generated image). No seed or negative prompt.",
+  "pricing_text": "Pricing: 75 credits per generation (varies by resolution).",
+  "input": {
+    "properties": {
+      "aspect_ratio": {
+        "default": "auto",
+        "description": "Output aspect ratio. \"auto\" (default) lets the model choose (an edit usually keeps its input's shape).",
+        "enum": [
+          "auto",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9"
+        ],
+        "type": "string"
+      },
+      "num_images": {
+        "default": 1,
+        "description": "Number of images to generate (each one is billed).",
+        "maximum": 4,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "prompt": {
+        "description": "Text description of the image to generate, or of the edit to make with the reference images; refer to them in order as @image_1, @image_2 …. Write `@handle` to cast a character: a BudgetPixel AI influencer or one of your own ([`GET /v1/characters`](/api-reference/characters/list-characters-you-can-cast)).",
+        "type": "string"
+      },
+      "reference_images": {
+        "description": "Optional reference images (up to 10) to edit or combine. Each item is a public image URL, a data URI, raw base64, or an uploaded-file URL from POST /v1/uploads. Omit for text-to-image. Each reference image bills 4 credits per generated image. An image under 300 px on a side is scaled up; its shape must be between 2:5 and 5:2.",
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 10,
+        "type": "array",
+        "x-bpx-media": "image"
+      },
+      "size": {
+        "default": "2K",
+        "description": "Output size: 2K is about 4 MP (2048x2048, or 2496x1664 at 3:2) and bills 75 credits per image; 4K is about 16 MP (5440x3072 at 16:9) and bills 115. Reference images add 4 each.",
+        "enum": [
+          "2K",
+          "4K"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt"
+    ]
+  }
+}
